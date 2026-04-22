@@ -8,8 +8,14 @@
  * @module
  */
 
+import type * as admin from "../admin.js";
 import type * as cases from "../cases.js";
 import type * as contact from "../contact.js";
+import type * as processSteps from "../processSteps.js";
+import type * as services from "../services.js";
+import type * as settings from "../settings.js";
+import type * as subscribers from "../subscribers.js";
+import type * as testimonials from "../testimonials.js";
 
 import type {
   ApiFromModules,
@@ -18,8 +24,14 @@ import type {
 } from "convex/server";
 
 declare const fullApi: ApiFromModules<{
+  admin: typeof admin;
   cases: typeof cases;
   contact: typeof contact;
+  processSteps: typeof processSteps;
+  services: typeof services;
+  settings: typeof settings;
+  subscribers: typeof subscribers;
+  testimonials: typeof testimonials;
 }>;
 
 /**

@@ -5,7 +5,6 @@ export const metadata = {
   robots: { index: false, follow: false },
 };
 
-// Alias — redirects into the main dashboard with the Inbox tab selected.
-export default function AdminInboxPage() {
+export default function AdminPage() {
   return <AdminDashboard />;
 }

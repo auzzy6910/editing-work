@@ -1,5 +1,6 @@
 import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
+import { assertAdmin } from "./admin";
 
 export const submit = mutation({
   args: {
@@ -19,6 +20,8 @@ export const submit = mutation({
     const id = await ctx.db.insert("contacts", {
       ...args,
       submittedAt: Date.now(),
+      status: "new",
+      starred: false,
     });
     return id;
   },
@@ -35,8 +38,6 @@ export const recentCount = query({
 export const listForAdmin = query({
   args: { token: v.string() },
   handler: async (ctx, { token }) => {
-    // Simple shared-secret gate. Set ADMIN_TOKEN in the Convex dashboard
-    // (Settings → Environment Variables). If unset, admin access is denied.
     const expected = process.env.ADMIN_TOKEN;
     if (!expected || token !== expected) {
       return { ok: false as const, count: 0, items: [] };
@@ -53,7 +54,39 @@ export const listForAdmin = query({
         approximateWordCount: r.approximateWordCount ?? "",
         message: r.message,
         submittedAt: r.submittedAt,
+        status: r.status ?? "new",
+        starred: r.starred ?? false,
       }));
     return { ok: true as const, count: items.length, items };
+  },
+});
+
+export const setStatus = mutation({
+  args: {
+    token: v.string(),
+    id: v.id("contacts"),
+    status: v.string(),
+  },
+  handler: async (ctx, { token, id, status }) => {
+    assertAdmin(token);
+    await ctx.db.patch(id, { status });
+  },
+});
+
+export const toggleStarred = mutation({
+  args: { token: v.string(), id: v.id("contacts") },
+  handler: async (ctx, { token, id }) => {
+    assertAdmin(token);
+    const row = await ctx.db.get(id);
+    if (!row) return;
+    await ctx.db.patch(id, { starred: !(row.starred ?? false) });
+  },
+});
+
+export const remove = mutation({
+  args: { token: v.string(), id: v.id("contacts") },
+  handler: async (ctx, { token, id }) => {
+    assertAdmin(token);
+    await ctx.db.delete(id);
   },
 });

@@ -6,10 +6,16 @@ import {
   LiveHeroStats,
   LiveTrustBar,
 } from "@/components/home/LiveHomeSections";
+import {
+  LiveHeroBadge,
+  LiveHeroIntro,
+} from "@/components/home/LiveHeroBadge";
+import { LiveProcess } from "@/components/home/LiveProcess";
+import { LiveTestimonials } from "@/components/home/LiveTestimonials";
+import { LiveCTA } from "@/components/home/LiveCTA";
 
 export default function Home() {
   const hero = CASES.find((c) => c.slug === "tokyo-product-launch-copy")!;
-  const totalCountries = 47;
 
   return (
     <div>
@@ -23,10 +29,7 @@ export default function Home() {
         <div className="relative mx-auto max-w-7xl px-6 pb-16 pt-20 md:pt-28">
           <div className="grid gap-12 md:grid-cols-[1.05fr_1fr] md:items-center">
             <div>
-              <span className="inline-flex items-center gap-2 rounded-full border border-robert-soft bg-canvas px-3 py-1 text-xs font-medium text-robert shadow-card">
-                <span className="h-1.5 w-1.5 animate-pulseDot rounded-full bg-robert" />
-                Accepting drafts for Q3 — 2 slots
-              </span>
+              <LiveHeroBadge />
               <h1 className="mt-6 font-display text-5xl leading-[1.02] text-ink md:text-7xl">
                 Before I touch it,
                 <br />
@@ -35,11 +38,7 @@ export default function Home() {
                   <span className="absolute inset-x-0 -bottom-1 block h-[6px] origin-left animate-inkSweep rounded-full bg-robert" />
                 </span>.
               </h1>
-              <p className="mt-6 max-w-xl text-pretty text-lg text-ink-soft">
-                I&apos;m Robert. I edit documents — academic, legal, creative,
-                corporate — in <strong className="text-ink">{totalCountries} countries</strong> and{" "}
-                <strong className="text-ink">11 languages</strong>. Pull the slider to see how.
-              </p>
+              <LiveHeroIntro />
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
                   href="/work"
@@ -76,97 +75,23 @@ export default function Home() {
       <section className="border-b border-robert-soft/50 bg-snow py-10">
         <div className="mx-auto max-w-7xl px-6">
           <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-ink-muted">
-            Edited in {totalCountries} countries
+            Edited in 47 countries
           </p>
           <LiveTrustBar />
         </div>
       </section>
 
-      {/* FEATURED WORK (live from Convex) */}
+      {/* FEATURED WORK (live) */}
       <LiveFeaturedWork />
 
-      {/* PROCESS */}
-      <section className="border-y border-robert-soft/50 bg-snow py-24">
-        <div className="mx-auto max-w-7xl px-6">
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">Process</p>
-          <h2 className="mt-2 max-w-2xl font-display text-4xl md:text-5xl">
-            Four steps. One promise: nothing gets <em>worse</em>.
-          </h2>
-          <div className="mt-12 grid gap-6 md:grid-cols-4">
-            {[
-              ["01", "Intake", "You send the draft, audience, deadline. I reply within 24 hours with a scope."],
-              ["02", "Audit", "A page-one read with 3–5 structural notes before I touch a comma."],
-              ["03", "Rewrite", "Line-by-line edits in tracked changes. You see every decision."],
-              ["04", "Polish", "Proofread, spellcheck, a final read aloud. Then back to you, signed."],
-            ].map(([num, title, body]) => (
-              <div key={num} className="rounded-xl2 border border-robert-soft/60 bg-canvas p-6 shadow-card">
-                <p className="font-mono text-sm text-robert">{num}</p>
-                <h3 className="mt-3 font-display text-2xl">{title}</h3>
-                <p className="mt-2 text-sm text-ink-soft">{body}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      {/* PROCESS (live) */}
+      <LiveProcess />
 
-      {/* TESTIMONIALS */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">Testimonials</p>
-        <h2 className="mt-2 max-w-3xl font-display text-4xl md:text-5xl">
-          &ldquo;He cut 10,000 words and kept every idea.&rdquo;
-        </h2>
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {[
-            [
-              "Robert gave my thesis a spine. My supervisor said it was the cleanest writing in the cohort.",
-              "PhD candidate · TU Berlin",
-            ],
-            [
-              "Reuters ran our release verbatim. That had never happened before.",
-              "Gulf Climate Summit · Dubai",
-            ],
-            [
-              "The contract went from 58 pages to 29 without losing a single enforceable clause.",
-              "Meridian Legal · London",
-            ],
-          ].map(([quote, who]) => (
-            <blockquote
-              key={who}
-              className="rounded-xl2 border border-robert-soft/60 bg-canvas p-8 shadow-card"
-            >
-              <p className="font-display text-xl italic leading-snug text-ink">&ldquo;{quote}&rdquo;</p>
-              <footer className="mt-6 text-xs font-medium uppercase tracking-widest text-ink-muted">
-                {who}
-              </footer>
-            </blockquote>
-          ))}
-        </div>
-      </section>
+      {/* TESTIMONIALS (live) */}
+      <LiveTestimonials />
 
-      {/* CTA */}
-      <section className="mx-auto max-w-7xl px-6 pb-24">
-        <div className="relative overflow-hidden rounded-xl2 bg-ink p-12 text-center text-white md:p-20">
-          <div
-            aria-hidden
-            className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-robert/40 blur-3xl"
-          />
-          <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert-soft">
-            Your draft · next Monday
-          </p>
-          <h2 className="relative mt-4 font-display text-4xl md:text-6xl">
-            Send me your worst paragraph.
-          </h2>
-          <p className="relative mx-auto mt-4 max-w-xl text-white/70">
-            I&apos;ll edit it for free so you can feel the difference before you hire me.
-          </p>
-          <Link
-            href="/contact"
-            className="relative mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-ink transition hover:bg-robert-soft"
-          >
-            Start the edit →
-          </Link>
-        </div>
-      </section>
+      {/* CTA (live) */}
+      <LiveCTA />
     </div>
   );
 }

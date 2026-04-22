@@ -36,5 +36,47 @@ export default defineSchema({
     approximateWordCount: v.optional(v.string()),
     message: v.string(),
     submittedAt: v.number(),
+    // "new" | "replied" | "archived" — optional so old rows stay valid.
+    status: v.optional(v.string()),
+    starred: v.optional(v.boolean()),
   }),
+
+  testimonials: defineTable({
+    quote: v.string(),
+    who: v.string(),
+    order: v.number(),
+    active: v.boolean(),
+  }).index("by_order", ["order"]),
+
+  services: defineTable({
+    slug: v.string(),
+    icon: v.string(),
+    name: v.string(),
+    price: v.string(),
+    body: v.string(),
+    items: v.array(v.string()),
+    order: v.number(),
+    active: v.boolean(),
+  })
+    .index("by_slug", ["slug"])
+    .index("by_order", ["order"]),
+
+  processSteps: defineTable({
+    number: v.string(),
+    title: v.string(),
+    body: v.string(),
+    order: v.number(),
+    active: v.boolean(),
+  }).index("by_order", ["order"]),
+
+  settings: defineTable({
+    key: v.string(),
+    value: v.string(),
+  }).index("by_key", ["key"]),
+
+  subscribers: defineTable({
+    email: v.string(),
+    source: v.optional(v.string()),
+    subscribedAt: v.number(),
+  }).index("by_email", ["email"]),
 });
