@@ -13,7 +13,7 @@ export function LiveCTA() {
   const body =
     settings?.["cta.body"] ??
     "Share a short note with the certificate, the issue, and your deadline. I'll quote a clear fee and a realistic timeline the same day.";
-  const button = settings?.["cta.button"] ?? "Start an application →";
+  const button = settings?.["cta.button"] ?? "Book editing →";
 
   return (
     <section className="mx-auto max-w-7xl px-6 pb-24">

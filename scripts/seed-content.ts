@@ -164,7 +164,7 @@ const SETTINGS = [
     value:
       "Share a short note with the certificate, the issue, and your deadline. I'll quote a clear fee and a realistic timeline the same day.",
   },
-  { key: "cta.button", value: "Start an application →" },
+  { key: "cta.button", value: "Book editing →" },
   { key: "contact.email", value: "hello@robertediting.co.ke" },
   {
     key: "footer.tagline",
