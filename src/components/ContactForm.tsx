@@ -1,22 +1,37 @@
 "use client";
 
 import { useState } from "react";
+import { useMutation } from "convex/react";
+import { api } from "../../convex/_generated/api";
 import { cn } from "@/lib/utils";
 
 export function ContactForm() {
-  const [sent, setSent] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
+  const submit = useMutation(api.contact.submit);
+  const [state, setState] = useState<"idle" | "sending" | "sent" | "error">("idle");
+  const [error, setError] = useState<string | null>(null);
 
-  function onSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
-      setSent(true);
-    }, 600);
+    setState("sending");
+    setError(null);
+    const fd = new FormData(e.currentTarget);
+    try {
+      await submit({
+        name: String(fd.get("name") ?? ""),
+        email: String(fd.get("email") ?? ""),
+        documentType: String(fd.get("type") ?? "") || undefined,
+        language: String(fd.get("language") ?? "") || undefined,
+        approximateWordCount: String(fd.get("words") ?? "") || undefined,
+        message: String(fd.get("message") ?? ""),
+      });
+      setState("sent");
+    } catch (err) {
+      setState("error");
+      setError(err instanceof Error ? err.message : "Something went wrong");
+    }
   }
 
-  if (sent) {
+  if (state === "sent") {
     return (
       <div className="flex min-h-[400px] flex-col items-start justify-center rounded-xl2 border border-robert-soft/60 bg-canvas p-10 shadow-card">
         <span className="rounded-full bg-robert-ghost px-3 py-1 text-xs font-semibold uppercase tracking-widest text-robert">
@@ -24,7 +39,7 @@ export function ContactForm() {
         </span>
         <h2 className="mt-4 font-display text-4xl">Thanks — I&apos;ll write back within 24h.</h2>
         <p className="mt-2 text-ink-soft">
-          In the meantime, read a case study, or go write something you&apos;re scared of.
+          Stored in Convex. In the meantime, read a case study, or go write something you&apos;re scared of.
         </p>
       </div>
     );
@@ -50,22 +65,28 @@ export function ContactForm() {
           required
           name="message"
           rows={5}
+          minLength={10}
           className="w-full rounded-lg border border-robert-soft bg-snow px-4 py-3 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
           placeholder="Who's the audience? What's the deadline? What's the single hardest thing about this draft?"
         />
       </label>
+      {error && (
+        <p className="mt-3 rounded-md bg-edit/10 px-3 py-2 text-xs text-edit">
+          {error}
+        </p>
+      )}
       <button
         type="submit"
-        disabled={submitting}
+        disabled={state === "sending"}
         className={cn(
           "mt-6 rounded-full bg-ink px-6 py-3 text-sm font-medium text-white transition",
-          submitting ? "opacity-60" : "hover:bg-robert",
+          state === "sending" ? "opacity-60" : "hover:bg-robert",
         )}
       >
-        {submitting ? "Sending…" : "Send to Robert"}
+        {state === "sending" ? "Sending to Convex…" : "Send to Robert"}
       </button>
       <p className="mt-3 text-xs text-ink-muted">
-        I read every email. I&apos;ll reply within 24 hours, Monday–Saturday.
+        Submissions go straight to a Convex-backed inbox. I read every one.
       </p>
     </form>
   );

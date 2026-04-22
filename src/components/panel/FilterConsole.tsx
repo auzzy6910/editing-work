@@ -1,6 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import { useQuery } from "convex/react";
+import { api } from "../../../convex/_generated/api";
 import { CASES } from "@/lib/cases";
 import {
   DOCUMENT_TYPES,
@@ -57,28 +59,31 @@ const TURNAROUNDS = [
 
 export function FilterConsole() {
   const [f, setF] = useState<FilterState>(INITIAL);
+  const live = useQuery(api.cases.listAll);
+  const cases: CaseStudy[] = (live as CaseStudy[] | undefined) ?? CASES;
+  const loading = live === undefined;
 
   const countries = useMemo(() => {
     const map = new Map<string, { iso: string; name: string; count: number }>();
-    for (const c of CASES) {
+    for (const c of cases) {
       const cur = map.get(c.country);
       if (cur) cur.count++;
       else map.set(c.country, { iso: c.country, name: c.countryName, count: 1 });
     }
     return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));
-  }, []);
+  }, [cases]);
 
   const languages = useMemo(() => {
     const map = new Map<string, { iso: string; name: string; count: number }>();
-    for (const c of CASES) {
+    for (const c of cases) {
       const cur = map.get(c.language);
       if (cur) cur.count++;
       else map.set(c.language, { iso: c.language, name: c.languageName, count: 1 });
     }
     return Array.from(map.values()).sort((a, b) => a.name.localeCompare(b.name));
-  }, []);
+  }, [cases]);
 
-  const filtered = useMemo(() => filterCases(CASES, f), [f]);
+  const filtered = useMemo(() => filterCases(cases, f), [cases, f]);
 
   function toggle<T>(key: keyof FilterState, value: T) {
     setF((prev) => {
@@ -110,7 +115,16 @@ export function FilterConsole() {
         <div className="rounded-xl2 border border-robert-soft/60 bg-canvas p-6 shadow-card">
           <div className="flex items-center justify-between">
             <h2 className="font-display text-lg">Filter console</h2>
-            <span className="rounded-full bg-robert-ghost px-2.5 py-1 text-xs font-medium text-robert">
+            <span
+              className="flex items-center gap-1.5 rounded-full bg-robert-ghost px-2.5 py-1 text-xs font-medium text-robert"
+              title={loading ? "Loading from Convex…" : "Live from Convex"}
+            >
+              <span
+                className={cn(
+                  "h-1.5 w-1.5 rounded-full",
+                  loading ? "bg-ink-muted" : "animate-pulseDot bg-robert",
+                )}
+              />
               {filtered.length} docs
             </span>
           </div>

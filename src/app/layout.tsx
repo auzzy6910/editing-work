@@ -3,6 +3,7 @@ import { Fraunces, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -39,9 +40,11 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${display.variable} ${sans.variable} ${mono.variable}`}>
       <body className="bg-canvas text-ink font-sans antialiased">
-        <Header />
-        <main className="min-h-[60vh]">{children}</main>
-        <Footer />
+        <ConvexClientProvider>
+          <Header />
+          <main className="min-h-[60vh]">{children}</main>
+          <Footer />
+        </ConvexClientProvider>
       </body>
     </html>
   );
