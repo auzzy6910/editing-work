@@ -1,26 +1,14 @@
 import Link from "next/link";
 import { BeforeAfter } from "@/components/slider/BeforeAfter";
-import { DocumentCard } from "@/components/card/DocumentCard";
 import { CASES } from "@/lib/cases";
-import { countryFlag, formatNumber } from "@/lib/utils";
-
-const COUNTRIES = Array.from(new Set(CASES.map((c) => c.country)));
-
-const FEATURED_SLUGS = [
-  "berlin-thesis-quantum",
-  "tokyo-product-launch-copy",
-  "lagos-grant-health",
-  "sao-paulo-novel-debut",
-  "london-contract-saas",
-  "paris-screenplay-feature",
-];
+import {
+  LiveFeaturedWork,
+  LiveHeroStats,
+  LiveTrustBar,
+} from "@/components/home/LiveHomeSections";
 
 export default function Home() {
-  const featured = FEATURED_SLUGS.map((s) => CASES.find((c) => c.slug === s)!).filter(Boolean);
   const hero = CASES.find((c) => c.slug === "tokyo-product-launch-copy")!;
-
-  const totalDocs = CASES.length * 37;
-  const totalWordsCut = CASES.reduce((a, c) => a + (c.wordCountBefore - c.wordCountAfter), 0) * 12;
   const totalCountries = 47;
 
   return (
@@ -66,11 +54,7 @@ export default function Home() {
                   Send your draft
                 </Link>
               </div>
-              <div className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-robert-soft/50 pt-6 font-mono text-xs text-ink-muted">
-                <Stat value={formatNumber(totalDocs)} label="docs edited" />
-                <Stat value={`${formatNumber(Math.round(totalWordsCut / 1000))}k`} label="words cut" />
-                <Stat value={String(totalCountries)} label="countries" />
-              </div>
+              <LiveHeroStats />
             </div>
 
             {/* Hero slider */}
@@ -94,38 +78,12 @@ export default function Home() {
           <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-ink-muted">
             Edited in {totalCountries} countries
           </p>
-          <div className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-2xl">
-            {COUNTRIES.map((iso) => (
-              <span key={iso} title={iso} aria-hidden>
-                {countryFlag(iso)}
-              </span>
-            ))}
-          </div>
+          <LiveTrustBar />
         </div>
       </section>
 
-      {/* FEATURED WORK */}
-      <section className="mx-auto max-w-7xl px-6 py-24">
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <div>
-            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
-              Featured work
-            </p>
-            <h2 className="mt-2 font-display text-4xl md:text-5xl">Six recent transformations.</h2>
-          </div>
-          <Link
-            href="/work"
-            className="hidden rounded-full border border-robert-soft bg-canvas px-5 py-2.5 text-sm transition hover:border-robert hover:text-robert md:inline-flex"
-          >
-            Browse all 12 →
-          </Link>
-        </div>
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {featured.map((c, i) => (
-            <DocumentCard key={c.slug} c={c} index={i} />
-          ))}
-        </div>
-      </section>
+      {/* FEATURED WORK (live from Convex) */}
+      <LiveFeaturedWork />
 
       {/* PROCESS */}
       <section className="border-y border-robert-soft/50 bg-snow py-24">
@@ -209,15 +167,6 @@ export default function Home() {
           </Link>
         </div>
       </section>
-    </div>
-  );
-}
-
-function Stat({ value, label }: { value: string; label: string }) {
-  return (
-    <div>
-      <p className="font-display text-2xl text-ink">{value}</p>
-      <p className="mt-1 uppercase tracking-widest">{label}</p>
     </div>
   );
 }

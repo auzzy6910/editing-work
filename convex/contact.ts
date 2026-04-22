@@ -31,3 +31,29 @@ export const recentCount = query({
     return all.length;
   },
 });
+
+export const listForAdmin = query({
+  args: { token: v.string() },
+  handler: async (ctx, { token }) => {
+    // Simple shared-secret gate. Set ADMIN_TOKEN in the Convex dashboard
+    // (Settings → Environment Variables). If unset, admin access is denied.
+    const expected = process.env.ADMIN_TOKEN;
+    if (!expected || token !== expected) {
+      return { ok: false as const, count: 0, items: [] };
+    }
+    const all = await ctx.db.query("contacts").collect();
+    const items = all
+      .sort((a, b) => b.submittedAt - a.submittedAt)
+      .map((r) => ({
+        id: r._id,
+        name: r.name,
+        email: r.email,
+        documentType: r.documentType ?? "",
+        language: r.language ?? "",
+        approximateWordCount: r.approximateWordCount ?? "",
+        message: r.message,
+        submittedAt: r.submittedAt,
+      }));
+    return { ok: true as const, count: items.length, items };
+  },
+});

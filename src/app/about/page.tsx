@@ -1,6 +1,5 @@
 import Link from "next/link";
-import { CASES } from "@/lib/cases";
-import { countryFlag } from "@/lib/utils";
+import { LiveCountries } from "@/components/about/LiveCountries";
 
 export const metadata = {
   title: "About — Robert Editing",
@@ -9,7 +8,6 @@ export const metadata = {
 const LANGUAGES = ["English", "Spanish", "Portuguese", "French", "German", "Italian", "Swahili (reading)"];
 
 export default function AboutPage() {
-  const uniqueCountries = Array.from(new Set(CASES.map((c) => c.country)));
   return (
     <div className="mx-auto max-w-4xl px-6 py-24">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">About</p>
@@ -50,16 +48,7 @@ export default function AboutPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
           Cities I&apos;ve edited for
         </p>
-        <div className="mt-3 grid grid-cols-6 gap-3 text-3xl sm:grid-cols-12">
-          {uniqueCountries.map((iso) => (
-            <span key={iso} title={iso} aria-hidden>
-              {countryFlag(iso)}
-            </span>
-          ))}
-        </div>
-        <p className="mt-4 text-sm text-ink-muted">
-          Plus dozens more not pictured. If your city isn&apos;t here, I&apos;d be glad to add it.
-        </p>
+        <LiveCountries />
       </section>
 
       <div className="mt-16 rounded-xl2 border border-robert-soft/60 bg-snow p-8">
