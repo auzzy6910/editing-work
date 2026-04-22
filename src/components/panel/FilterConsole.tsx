@@ -6,17 +6,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { api } from "../../../convex/_generated/api";
 import { CASES } from "@/lib/cases";
 import {
-  DOCUMENT_CATEGORIES,
   DOCUMENT_TYPES,
   EDITING_LEVELS,
   INDUSTRIES,
   type CaseStudy,
-  type DocumentCategory,
   type DocumentType,
   type EditingLevel,
   type Industry,
 } from "@/lib/types";
-import { cn, countryFlag, formatNumber } from "@/lib/utils";
+import { cn, countryFlag } from "@/lib/utils";
 import { DocumentCard } from "@/components/card/DocumentCard";
 
 type SortKey = "recent" | "biggest" | "highest" | "longest";
@@ -54,10 +52,10 @@ const INITIAL: FilterState = {
 };
 
 const TURNAROUNDS = [
-  { id: "24", label: "24h", max: 24 },
-  { id: "72", label: "3-day", max: 72 },
-  { id: "168", label: "1-week", max: 168 },
-  { id: "custom", label: "Custom", max: Infinity },
+  { id: "48", label: "48h", max: 48 },
+  { id: "168", label: "1 week", max: 168 },
+  { id: "336", label: "2 weeks", max: 336 },
+  { id: "custom", label: "Longer", max: Infinity },
 ];
 
 export function FilterConsole() {
@@ -149,7 +147,7 @@ export function FilterConsole() {
                   loading ? "bg-ink-muted" : "animate-pulseDot bg-robert",
                 )}
               />
-              {filtered.length} docs
+              {filtered.length} cases
             </span>
           </div>
 
@@ -159,7 +157,7 @@ export function FilterConsole() {
             <input
               value={f.q}
               onChange={(e) => setF({ ...f, q: e.target.value })}
-              placeholder="Search titles, clients, excerpts…"
+              placeholder="Search titles, clients, tags…"
               className="h-10 w-full rounded-full border border-robert-soft bg-snow px-4 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
             />
           </label>
@@ -188,11 +186,27 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title={`Document type · ${DOCUMENT_TYPES.length}`}>
-            <DocumentTypeCatalog
-              active={f.types}
-              onToggle={(id) => toggle<DocumentType>("types", id)}
-            />
+          <Section title="Document type">
+            <div className="flex flex-wrap gap-1.5">
+              {DOCUMENT_TYPES.map((d) => {
+                const active = f.types.includes(d.id);
+                return (
+                  <button
+                    key={d.id}
+                    onClick={() => toggle<DocumentType>("types", d.id)}
+                    className={cn(
+                      "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition",
+                      active
+                        ? "border-robert bg-robert text-white"
+                        : "border-robert-soft bg-canvas text-ink-soft hover:border-robert hover:text-ink",
+                    )}
+                  >
+                    <span aria-hidden>{d.icon}</span>
+                    {d.label}
+                  </button>
+                );
+              })}
+            </div>
           </Section>
 
           <Section title="Language">
@@ -218,7 +232,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Industry">
+          <Section title="Agency">
             <div className="flex flex-wrap gap-1.5">
               {INDUSTRIES.map((i) => {
                 const active = f.industries.includes(i.id);
@@ -240,7 +254,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Editing level">
+          <Section title="Service type">
             <div className="grid grid-cols-2 gap-1.5">
               {EDITING_LEVELS.map((l) => {
                 const active = f.levels.includes(l.id);
@@ -282,24 +296,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Word count range">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs font-mono text-ink-soft">
-                <span>{formatNumber(f.minWords)}</span>
-                <span className="flex-1 border-t border-dashed border-robert-soft" />
-                <span>{formatNumber(f.maxWords)}</span>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={150_000}
-                step={1_000}
-                value={f.maxWords}
-                onChange={(e) => setF({ ...f, maxWords: Number(e.target.value) })}
-                className="w-full accent-robert"
-              />
-            </div>
-          </Section>
+
 
           <Section title="Year">
             <div className="flex flex-wrap gap-1.5">
@@ -321,15 +318,15 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Improvement metrics">
+          <Section title="Outcomes">
             <div className="space-y-2">
               <Toggle
-                label="Readability +20%"
+                label="Delivered with 100% accuracy"
                 active={f.metricReadability}
                 onClick={() => setF({ ...f, metricReadability: !f.metricReadability })}
               />
               <Toggle
-                label="−15% word count"
+                label="Under 1 week turnaround"
                 active={f.metricWordCut}
                 onClick={() => setF({ ...f, metricWordCut: !f.metricWordCut })}
               />
@@ -343,9 +340,9 @@ export function FilterConsole() {
               className="h-9 w-full rounded-md border border-robert-soft bg-canvas px-2 text-sm outline-none focus:border-robert focus:shadow-ring"
             >
               <option value="recent">Most recent</option>
-              <option value="biggest">Biggest transformation</option>
+              <option value="biggest">Most paperwork</option>
               <option value="highest">Highest rated</option>
-              <option value="longest">Longest document</option>
+              <option value="longest">Longest case</option>
             </select>
           </Section>
 
@@ -438,97 +435,6 @@ function Toggle({
   );
 }
 
-function DocumentTypeCatalog({
-  active,
-  onToggle,
-}: {
-  active: DocumentType[];
-  onToggle: (id: DocumentType) => void;
-}) {
-  const [query, setQuery] = useState("");
-  const [open, setOpen] = useState<Set<DocumentCategory>>(
-    () =>
-      new Set<DocumentCategory>(
-        active.length ? DOCUMENT_CATEGORIES.map((c) => c.id) : ["academic", "books"],
-      ),
-  );
-
-  const byCategory = useMemo(() => {
-    const map = new Map<DocumentCategory, typeof DOCUMENT_TYPES>();
-    const needle = query.trim().toLowerCase();
-    for (const d of DOCUMENT_TYPES) {
-      if (needle && !d.label.toLowerCase().includes(needle)) continue;
-      const arr = map.get(d.category) ?? [];
-      arr.push(d);
-      map.set(d.category, arr);
-    }
-    return map;
-  }, [query]);
-
-  return (
-    <div className="space-y-2">
-      <input
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        placeholder={`Search ${DOCUMENT_TYPES.length} document types…`}
-        className="w-full rounded-md border border-robert-soft bg-canvas px-3 py-1.5 text-xs text-ink placeholder:text-ink-muted/80 focus:border-robert focus:outline-none"
-      />
-      {DOCUMENT_CATEGORIES.map((cat) => {
-        const items = byCategory.get(cat.id) ?? [];
-        if (!items.length) return null;
-        const isOpen = open.has(cat.id) || query.trim().length > 0;
-        const activeInCat = items.filter((i) => active.includes(i.id)).length;
-        return (
-          <div key={cat.id} className="rounded-md border border-robert-soft/60 bg-canvas">
-            <button
-              type="button"
-              onClick={() => {
-                setOpen((prev) => {
-                  const next = new Set(prev);
-                  if (next.has(cat.id)) next.delete(cat.id);
-                  else next.add(cat.id);
-                  return next;
-                });
-              }}
-              className="flex w-full items-center justify-between px-2.5 py-1.5 text-left text-[11px] font-medium uppercase tracking-widest text-ink-soft hover:text-ink"
-            >
-              <span className="flex items-center gap-1.5">
-                <span className="text-ink-muted">{isOpen ? "−" : "+"}</span>
-                {cat.label}
-              </span>
-              <span className="font-mono text-[10px] text-ink-muted">
-                {activeInCat ? `${activeInCat}/${items.length}` : items.length}
-              </span>
-            </button>
-            {isOpen && (
-              <div className="flex flex-wrap gap-1.5 border-t border-robert-soft/50 p-2">
-                {items.map((d) => {
-                  const on = active.includes(d.id);
-                  return (
-                    <button
-                      key={d.id}
-                      onClick={() => onToggle(d.id)}
-                      className={cn(
-                        "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition",
-                        on
-                          ? "border-robert bg-robert text-white"
-                          : "border-robert-soft bg-canvas text-ink-soft hover:border-robert hover:text-ink",
-                      )}
-                    >
-                      <span aria-hidden>{d.icon}</span>
-                      {d.label}
-                    </button>
-                  );
-                })}
-              </div>
-            )}
-          </div>
-        );
-      })}
-    </div>
-  );
-}
-
 function filterCases(cases: CaseStudy[], f: FilterState): CaseStudy[] {
   let out = cases.filter((c) => {
     if (f.q) {
@@ -551,11 +457,8 @@ function filterCases(cases: CaseStudy[], f: FilterState): CaseStudy[] {
     }
     if (c.wordCountBefore < f.minWords || c.wordCountBefore > f.maxWords) return false;
     if (f.year !== "any" && new Date(c.date).getFullYear() !== f.year) return false;
-    if (f.metricReadability && c.readabilityAfter - c.readabilityBefore < 20) return false;
-    if (f.metricWordCut) {
-      const cut = (c.wordCountBefore - c.wordCountAfter) / c.wordCountBefore;
-      if (cut < 0.15) return false;
-    }
+    if (f.metricReadability && c.readabilityAfter < 100) return false;
+    if (f.metricWordCut && c.turnaroundHours > 168) return false;
     return true;
   });
 
@@ -564,14 +467,11 @@ function filterCases(cases: CaseStudy[], f: FilterState): CaseStudy[] {
       case "recent":
         return +new Date(b.date) - +new Date(a.date);
       case "biggest":
-        return (
-          (b.wordCountBefore - b.wordCountAfter) / b.wordCountBefore -
-          (a.wordCountBefore - a.wordCountAfter) / a.wordCountBefore
-        );
+        return b.wordCountBefore - a.wordCountBefore;
       case "highest":
         return b.rating - a.rating;
       case "longest":
-        return b.wordCountBefore - a.wordCountBefore;
+        return b.turnaroundHours - a.turnaroundHours;
     }
   });
   return out;

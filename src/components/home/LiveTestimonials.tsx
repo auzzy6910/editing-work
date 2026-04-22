@@ -10,19 +10,20 @@ const FALLBACK = [
   {
     id: "f1",
     quote:
-      "Robert gave my thesis a spine. My supervisor said it was the cleanest writing in the cohort.",
-    who: "PhD candidate · TU Berlin",
+      "I had given up on getting my KCSE replacement. Robert had it in my hands in three weeks with a fresh KNEC stamp.",
+    who: "Brian O. · Kisumu",
   },
   {
     id: "f2",
-    quote: "Reuters ran our release verbatim. That had never happened before.",
-    who: "Gulf Climate Summit · Dubai",
+    quote:
+      "My passport was renewed in five working days before a medical conference. The fast-track queue actually works when you know the procedure.",
+    who: "Dr. Njeri · Nairobi",
   },
   {
     id: "f3",
     quote:
-      "The contract went from 58 pages to 29 without losing a single enforceable clause.",
-    who: "Meridian Legal · London",
+      "A clerk had misspelt my surname on my birth certificate in 2003. Robert got the correction through Sheria House without a single back-and-forth from me.",
+    who: "Wanjiru family · Nairobi",
   },
 ];
 
@@ -50,7 +51,7 @@ export function LiveTestimonials() {
           Testimonials
         </p>
         <h2 className="mt-2 max-w-3xl font-display text-4xl md:text-5xl">
-          &ldquo;He cut 10,000 words and kept every idea.&rdquo;
+          &ldquo;Three weeks. Fresh stamp. No drama.&rdquo;
         </h2>
       </Reveal>
 

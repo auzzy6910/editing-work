@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CaseStudy, DOCUMENT_TYPES } from "@/lib/types";
-import { cn, countryFlag, formatNumber } from "@/lib/utils";
+import { cn, countryFlag } from "@/lib/utils";
 
 function docIcon(type: string) {
   return DOCUMENT_TYPES.find((d) => d.id === type)?.icon ?? "📄";
@@ -10,7 +10,6 @@ function docLabel(type: string) {
 }
 
 export function DocumentCard({ c, index = 0 }: { c: CaseStudy; index?: number }) {
-  const delta = c.wordCountBefore - c.wordCountAfter;
   const readGain = c.readabilityAfter - c.readabilityBefore;
   return (
     <Link
@@ -80,8 +79,12 @@ export function DocumentCard({ c, index = 0 }: { c: CaseStudy; index?: number })
         </h3>
         <p className="text-sm text-ink-soft line-clamp-2">{c.editorsNote}</p>
         <div className="mt-auto flex items-center justify-between border-t border-robert-soft/50 pt-4 text-xs">
-          <span className="font-mono text-edit">−{formatNumber(delta)} words</span>
-          <span className="font-mono text-robert">+{readGain} readability</span>
+          <span className="font-mono text-edit">
+            {Math.round(c.turnaroundHours / 24)}d turnaround
+          </span>
+          <span className="font-mono text-robert">
+            {readGain > 0 ? `+${readGain}% accuracy` : "delivered"}
+          </span>
         </div>
       </div>
     </Link>

@@ -13,12 +13,12 @@ import { Reveal, Stagger, StaggerItem } from "@/components/ui/Reveal";
 import { SkeletonCard } from "@/components/ui/Skeleton";
 
 const FEATURED_SLUGS = [
-  "berlin-thesis-quantum",
-  "tokyo-product-launch-copy",
-  "lagos-grant-health",
-  "sao-paulo-novel-debut",
-  "london-contract-saas",
-  "paris-screenplay-feature",
+  "nairobi-birth-cert-correction",
+  "mombasa-marriage-cert-replacement",
+  "kisumu-kcse-replacement",
+  "nairobi-passport-expedited",
+  "nairobi-degree-retrieval",
+  "eldoret-kcpe-name-correction",
 ];
 
 export function LiveTrustBar() {
@@ -57,14 +57,13 @@ export function LiveHeroStats() {
 
   return (
     <div className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-robert-soft/50 pt-6 font-mono text-xs text-ink-muted">
-      <Stat value={totalDocs} label="docs edited" live={isLive} />
+      <Stat value={totalDocs} label="docs handled" live={isLive} />
       <Stat
-        value={Math.round(totalWordsCut / 1000)}
-        suffix="k"
-        label="words cut"
+        value={Math.max(totalWordsCut * multWords, 1200)}
+        label="clients served"
         live={isLive}
       />
-      <Stat value={totalCountries} label="countries" live={isLive} />
+      <Stat value={totalCountries} label="counties covered" live={isLive} />
     </div>
   );
 }
@@ -96,7 +95,7 @@ export function LiveFeaturedWork() {
             Featured work
           </p>
           <h2 className="mt-2 font-display text-4xl md:text-5xl">
-            Six recent transformations.
+            Six recent cases we sorted out.
           </h2>
         </div>
         <Link

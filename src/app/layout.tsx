@@ -23,14 +23,14 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Robert Editing — Before I touch it, it's a draft.",
+  title: "Robert Editing — Kenyan document services, handled like a pro.",
   description:
-    "The quiet editor behind loud ideas. Documents edited in 47 countries. See the before/after.",
-  metadataBase: new URL("https://robertediting.example"),
+    "Birth, marriage, KCPE & KCSE, travel documents and degree/diploma/craft certificates — applied for, corrected, replaced, verified. Nationwide in Kenya.",
+  metadataBase: new URL("https://robertediting.co.ke"),
   openGraph: {
-    title: "Robert Editing",
+    title: "Robert Editing — Kenyan document services",
     description:
-      "Before I touch it, it's a draft. After I touch it, it's the version people remember.",
+      "Applications, corrections, replacements and verifications of Kenyan certificates. Handled end-to-end.",
     type: "website",
   },
 };

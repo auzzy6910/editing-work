@@ -7,19 +7,21 @@ export function FooterTagline() {
   const s = useQuery(api.settings.all);
   const text =
     s?.["footer.tagline"] ??
-    "Robert edits documents in 47 countries. Academic papers, manuscripts, contracts, speeches, screenplays — anything that has to be read and remembered.";
+    "Robert handles Kenyan documents end-to-end: birth & marriage certificates, KCPE/KCSE replacements, passports & travel docs, degree, diploma and craft certificates. Nationwide.";
   return <p className="mt-4 max-w-md text-sm text-ink-soft">{text}</p>;
 }
 
 export function FooterNewsletterCopy() {
   const s = useQuery(api.settings.all);
-  const text = s?.["footer.newsletterCopy"] ?? "The Red Pen Digest — one email a month. No fluff.";
+  const text =
+    s?.["footer.newsletterCopy"] ??
+    "Paperwork notes — occasional updates on fees, timelines & agency changes.";
   return <p className="mt-2 text-xs text-ink-muted">{text}</p>;
 }
 
 export function FooterContactLink() {
   const s = useQuery(api.settings.all);
-  const email = s?.["contact.email"] ?? "hello@robertediting.example";
+  const email = s?.["contact.email"] ?? "hello@robertediting.co.ke";
   const linkedin = s?.["social.linkedin"] ?? "#";
   const twitter = s?.["social.twitter"] ?? "#";
   return (

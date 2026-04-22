@@ -50,7 +50,7 @@ export function CasesTab({ token }: { token: string }) {
       </div>
       <ul className="mt-4 space-y-2">
         {rows.map((r) => {
-          const wordsCut = r.wordCountBefore - r.wordCountAfter;
+          const days = Math.round(r.turnaroundHours / 24);
           return (
             <li
               key={r.id}
@@ -71,8 +71,8 @@ export function CasesTab({ token }: { token: string }) {
                 </p>
               </div>
               <div className="text-right text-xs text-ink-muted">
-                <p>−{wordsCut.toLocaleString()} words</p>
-                <p>+{r.readabilityAfter - r.readabilityBefore} readability</p>
+                <p>{days}d turnaround</p>
+                <p>{r.readabilityAfter}% accuracy</p>
               </div>
               <div className="flex gap-2">
                 <a

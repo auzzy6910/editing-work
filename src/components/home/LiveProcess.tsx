@@ -10,26 +10,26 @@ const FALLBACK = [
   {
     id: "f1",
     number: "01",
-    title: "Intake",
-    body: "You send the draft, audience, deadline. I reply within 24 hours with a scope.",
+    title: "Consultation",
+    body: "Tell me the certificate, the issue and your deadline. I reply the same day with the exact documents needed and the government fee.",
   },
   {
     id: "f2",
     number: "02",
-    title: "Audit",
-    body: "A page-one read with 3–5 structural notes before I touch a comma.",
+    title: "Paperwork prep",
+    body: "We compile affidavits, ID copies, passport photos and supporting letters together — nothing you didn't already have at home.",
   },
   {
     id: "f3",
     number: "03",
-    title: "Rewrite",
-    body: "Line-by-line edits in tracked changes. You see every decision.",
+    title: "Submission & follow-up",
+    body: "I lodge the application at the right office (Sheria House, KNEC, Nyayo House, CUE) and follow up in person until it is ready.",
   },
   {
     id: "f4",
     number: "04",
-    title: "Polish",
-    body: "Proofread, spellcheck, a final read aloud. Then back to you, signed.",
+    title: "Collection & delivery",
+    body: "I collect the certificate, verify details, and hand-deliver in Nairobi or courier nationwide.",
   },
 ];
 
@@ -51,7 +51,7 @@ export function LiveProcess() {
             Process
           </p>
           <h2 className="mt-2 max-w-2xl font-display text-4xl md:text-5xl">
-            {rows.length} steps. One promise: nothing gets <em>worse</em>.
+            {rows.length} steps. One promise: you never queue.
           </h2>
         </Reveal>
         <AnimatePresence mode="wait">

@@ -5,28 +5,42 @@ export const metadata = {
   title: "About — Robert Editing",
 };
 
-const LANGUAGES = ["English", "Spanish", "Portuguese", "French", "German", "Italian", "Swahili (reading)"];
+const LANGUAGES = ["English", "Kiswahili"];
+
+const AGENCIES = [
+  "Civil Registration Services (Sheria House)",
+  "Kenya National Examinations Council (KNEC)",
+  "Directorate of Immigration Services (Nyayo House)",
+  "Commission for University Education (CUE)",
+  "Ministry of Foreign Affairs (MOFA)",
+  "NITA — National Industrial Training Authority",
+  "Ministry of Interior — Chiefs & DO's offices",
+];
 
 export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-24">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">About</p>
       <h1 className="mt-2 font-display text-5xl md:text-7xl leading-[1.05]">
-        I edit for people who have something true to say.
+        Your paperwork. My problem.
       </h1>
       <div className="mt-10 space-y-6 text-lg text-ink-soft">
         <p>
-          I&apos;m Robert — a document editor with 14 years of practice across academia, law, tech,
-          and fiction. I&apos;ve edited a dissertation in a Berlin café, a minister&apos;s speech
-          over a sleepless weekend in Bogotá, and a debut novel one chapter at a time for a year.
+          I&apos;m Robert — a Kenya-based documents consultant. For the last decade I have helped
+          families, students, graduates and travellers register, correct, replace, and verify
+          official documents without losing their sanity to the queues.
         </p>
         <p>
-          My job is to make your writing sound more like you, not more like me. I cut hedges. I
-          keep voice. I find the one sentence you should have opened with and put it there.
+          I work across five document families: <strong>birth certificates</strong>,
+          <strong> marriage certificates</strong>, <strong>KCPE &amp; KCSE certificates</strong>,
+          <strong> travel documents</strong> (passports &amp; ETCs), and{" "}
+          <strong>degree, diploma &amp; craft certificates</strong>. Whether you need a fresh
+          application, a correction, a lost-document replacement, or an authentication for use
+          abroad, I handle the paperwork, the follow-ups, and the collection.
         </p>
         <p>
-          I hold an MA in Literature (Edinburgh) and a Certificate in Editing (UC Berkeley). I am
-          a member of the Chartered Institute of Editing and Proofreading.
+          Every file is tracked end-to-end. You get a WhatsApp update after every visit to the
+          office. No fixers. No ghosting. No extra fees beyond what the government gazettes.
         </p>
       </div>
 
@@ -46,14 +60,31 @@ export default function AboutPage() {
 
       <section className="mt-16">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
-          Cities I&apos;ve edited for
+          Agencies we work with daily
+        </p>
+        <ul className="mt-4 grid gap-2 md:grid-cols-2">
+          {AGENCIES.map((a) => (
+            <li
+              key={a}
+              className="rounded-md border border-robert-soft/60 bg-canvas px-3 py-2 text-sm text-ink-soft"
+            >
+              {a}
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section className="mt-16">
+        <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
+          Counties we&apos;ve served
         </p>
         <LiveCountries />
       </section>
 
       <div className="mt-16 rounded-xl2 border border-robert-soft/60 bg-snow p-8">
         <p className="font-display text-2xl italic text-ink">
-          &ldquo;Good writing is a conversation at scale. My job is to make sure nobody leaves the room.&rdquo;
+          &ldquo;If the document exists on paper somewhere in Kenya, we can find it, correct it, or
+          replace it.&rdquo;
         </p>
         <p className="mt-3 text-sm text-ink-muted">— Robert</p>
       </div>
@@ -63,13 +94,13 @@ export default function AboutPage() {
           href="/contact"
           className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white transition hover:bg-robert"
         >
-          Start a project
+          Start an application
         </Link>
         <Link
           href="/work"
           className="rounded-full border border-robert-soft bg-canvas px-5 py-2.5 text-sm transition hover:border-robert"
         >
-          See the work
+          See recent cases
         </Link>
       </div>
     </div>

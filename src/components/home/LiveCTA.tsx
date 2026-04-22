@@ -8,12 +8,12 @@ import { Reveal } from "@/components/ui/Reveal";
 
 export function LiveCTA() {
   const settings = useQuery(api.settings.all);
-  const kicker = settings?.["cta.kicker"] ?? "Your draft · next Monday";
-  const title = settings?.["cta.title"] ?? "Send me your worst paragraph.";
+  const kicker = settings?.["cta.kicker"] ?? "Your file · next week";
+  const title = settings?.["cta.title"] ?? "Tell me what you need.";
   const body =
     settings?.["cta.body"] ??
-    "I'll edit it for free so you can feel the difference before you hire me.";
-  const button = settings?.["cta.button"] ?? "Start the edit →";
+    "Share a short note with the certificate, the issue, and your deadline. I'll quote a clear fee and a realistic timeline the same day.";
+  const button = settings?.["cta.button"] ?? "Start an application →";
 
   return (
     <section className="mx-auto max-w-7xl px-6 pb-24">

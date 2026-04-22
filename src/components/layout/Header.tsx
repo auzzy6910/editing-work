@@ -29,7 +29,7 @@ export function Header() {
             href="/contact"
             className="hidden rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white shadow-card transition-all hover:bg-robert hover:shadow-cardHover sm:inline-flex"
           >
-            Send your draft
+            Start an application
           </Link>
         </div>
       </div>

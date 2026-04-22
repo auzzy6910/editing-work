@@ -11,9 +11,9 @@ const FilterConsole = dynamic(
 );
 
 export const metadata = {
-  title: "Work — Robert Editing",
+  title: "Recent cases — Robert Editing",
   description:
-    "Every document Robert has edited. Filter by country, type, language, industry.",
+    "Every Kenyan document case we've handled. Filter by county, certificate, agency, service.",
 };
 
 export default function WorkPage() {
@@ -21,13 +21,13 @@ export default function WorkPage() {
     <div className="mx-auto max-w-7xl px-6 py-16">
       <header className="mb-12 max-w-3xl">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
-          The archive
+          Recent cases
         </p>
         <h1 className="mt-2 font-display text-5xl md:text-6xl">
-          Every edit, on record.
+          What we&apos;ve sorted out.
         </h1>
         <p className="mt-4 text-lg text-ink-soft">
-          Twelve recent transformations. Filter the console on the left — the URL
+          Real cases, real outcomes. Filter the console on the left — the URL
           updates so you can share any view.
         </p>
       </header>

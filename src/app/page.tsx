@@ -39,7 +39,8 @@ const BeforeAfter = dynamic(
 );
 
 export default function Home() {
-  const hero = CASES.find((c) => c.slug === "tokyo-product-launch-copy")!;
+  const hero =
+    CASES.find((c) => c.slug === "nairobi-birth-cert-correction") ?? CASES[0];
 
   return (
     <div>
@@ -61,11 +62,11 @@ export default function Home() {
             >
               <LiveHeroBadge />
               <h1 className="mt-6 font-display text-5xl leading-[1.02] text-ink md:text-7xl">
-                Before I touch it,
+                Your paperwork,
                 <br />
-                it&apos;s a{" "}
+                handled like a{" "}
                 <span className="relative inline-block">
-                  draft
+                  pro
                   <span className="absolute inset-x-0 -bottom-1 block h-[6px] origin-left animate-inkSweep rounded-full bg-robert" />
                 </span>
                 .
@@ -76,13 +77,13 @@ export default function Home() {
                   href="/work"
                   className="group relative overflow-hidden rounded-full bg-ink px-6 py-3 text-sm font-medium text-white shadow-card transition duration-300 hover:-translate-y-0.5 hover:bg-robert hover:shadow-cardHover"
                 >
-                  <span className="relative z-10">See the edits →</span>
+                  <span className="relative z-10">See recent cases →</span>
                 </Link>
                 <Link
                   href="/contact"
                   className="rounded-full border border-robert-soft bg-canvas px-6 py-3 text-sm font-medium text-ink transition duration-300 hover:-translate-y-0.5 hover:border-robert hover:text-robert"
                 >
-                  Send your draft
+                  Start an application
                 </Link>
               </div>
               <LiveHeroStats />
@@ -100,7 +101,7 @@ export default function Home() {
                 after={hero.excerptAfter}
               />
               <p className="mt-3 text-center text-xs text-ink-muted">
-                Drag the divider · arrow keys also work
+                Drag the divider · see the correction in context
               </p>
             </motion.div>
           </div>
@@ -112,7 +113,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
             <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-ink-muted">
-              Edited in 47 countries
+              Trusted across Kenya · KNEC · Immigration · Sheria House
             </p>
           </Reveal>
           <LiveTrustBar />

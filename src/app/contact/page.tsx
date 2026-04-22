@@ -8,28 +8,29 @@ export default function ContactPage() {
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">Contact</p>
         <h1 className="mt-2 font-display text-5xl md:text-7xl leading-[1.05]">
-          Send me your worst paragraph.
+          Tell me what you need.
         </h1>
         <p className="mt-6 text-lg text-ink-soft">
-          I reply within 24 hours, every day except Sunday. The first 100 words are on me — no
-          strings, no sales calls, just an honest sample edit.
+          Share a short note: which certificate, what the issue is, and how soon you need it. I
+          reply the same day (Sunday excluded) with a clear quote, the government fees, and a
+          realistic timeline.
         </p>
         <dl className="mt-10 grid grid-cols-2 gap-6 text-sm">
           <div>
-            <dt className="text-xs uppercase tracking-widest text-ink-muted">Email</dt>
-            <dd className="mt-1 font-mono">hello@robertediting.example</dd>
+            <dt className="text-xs uppercase tracking-widest text-ink-muted">WhatsApp</dt>
+            <dd className="mt-1 font-mono">+254 700 000 000</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Turnaround</dt>
-            <dd className="mt-1 font-mono">24h reply · 3–14d delivery</dd>
+            <dd className="mt-1 font-mono">Reply same day · 2–21d delivery</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Time zone</dt>
-            <dd className="mt-1 font-mono">Lisbon (UTC+0/+1)</dd>
+            <dd className="mt-1 font-mono">Nairobi (UTC+3)</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Availability</dt>
-            <dd className="mt-1 font-mono">2 slots open, Q3</dd>
+            <dd className="mt-1 font-mono">Taking new cases</dd>
           </div>
         </dl>
       </div>
