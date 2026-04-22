@@ -6,10 +6,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import { api } from "../../../convex/_generated/api";
 import { CASES } from "@/lib/cases";
 import {
+  DOCUMENT_CATEGORIES,
   DOCUMENT_TYPES,
   EDITING_LEVELS,
   INDUSTRIES,
   type CaseStudy,
+  type DocumentCategory,
   type DocumentType,
   type EditingLevel,
   type Industry,
@@ -186,27 +188,11 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Document type">
-            <div className="flex flex-wrap gap-1.5">
-              {DOCUMENT_TYPES.map((d) => {
-                const active = f.types.includes(d.id);
-                return (
-                  <button
-                    key={d.id}
-                    onClick={() => toggle<DocumentType>("types", d.id)}
-                    className={cn(
-                      "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition",
-                      active
-                        ? "border-robert bg-robert text-white"
-                        : "border-robert-soft bg-canvas text-ink-soft hover:border-robert hover:text-ink",
-                    )}
-                  >
-                    <span aria-hidden>{d.icon}</span>
-                    {d.label}
-                  </button>
-                );
-              })}
-            </div>
+          <Section title={`Document type · ${DOCUMENT_TYPES.length}`}>
+            <DocumentTypeCatalog
+              active={f.types}
+              onToggle={(id) => toggle<DocumentType>("types", id)}
+            />
           </Section>
 
           <Section title="Language">
@@ -449,6 +435,97 @@ function Toggle({
         />
       </span>
     </button>
+  );
+}
+
+function DocumentTypeCatalog({
+  active,
+  onToggle,
+}: {
+  active: DocumentType[];
+  onToggle: (id: DocumentType) => void;
+}) {
+  const [query, setQuery] = useState("");
+  const [open, setOpen] = useState<Set<DocumentCategory>>(
+    () =>
+      new Set<DocumentCategory>(
+        active.length ? DOCUMENT_CATEGORIES.map((c) => c.id) : ["academic", "books"],
+      ),
+  );
+
+  const byCategory = useMemo(() => {
+    const map = new Map<DocumentCategory, typeof DOCUMENT_TYPES>();
+    const needle = query.trim().toLowerCase();
+    for (const d of DOCUMENT_TYPES) {
+      if (needle && !d.label.toLowerCase().includes(needle)) continue;
+      const arr = map.get(d.category) ?? [];
+      arr.push(d);
+      map.set(d.category, arr);
+    }
+    return map;
+  }, [query]);
+
+  return (
+    <div className="space-y-2">
+      <input
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        placeholder={`Search ${DOCUMENT_TYPES.length} document types…`}
+        className="w-full rounded-md border border-robert-soft bg-canvas px-3 py-1.5 text-xs text-ink placeholder:text-ink-muted/80 focus:border-robert focus:outline-none"
+      />
+      {DOCUMENT_CATEGORIES.map((cat) => {
+        const items = byCategory.get(cat.id) ?? [];
+        if (!items.length) return null;
+        const isOpen = open.has(cat.id) || query.trim().length > 0;
+        const activeInCat = items.filter((i) => active.includes(i.id)).length;
+        return (
+          <div key={cat.id} className="rounded-md border border-robert-soft/60 bg-canvas">
+            <button
+              type="button"
+              onClick={() => {
+                setOpen((prev) => {
+                  const next = new Set(prev);
+                  if (next.has(cat.id)) next.delete(cat.id);
+                  else next.add(cat.id);
+                  return next;
+                });
+              }}
+              className="flex w-full items-center justify-between px-2.5 py-1.5 text-left text-[11px] font-medium uppercase tracking-widest text-ink-soft hover:text-ink"
+            >
+              <span className="flex items-center gap-1.5">
+                <span className="text-ink-muted">{isOpen ? "−" : "+"}</span>
+                {cat.label}
+              </span>
+              <span className="font-mono text-[10px] text-ink-muted">
+                {activeInCat ? `${activeInCat}/${items.length}` : items.length}
+              </span>
+            </button>
+            {isOpen && (
+              <div className="flex flex-wrap gap-1.5 border-t border-robert-soft/50 p-2">
+                {items.map((d) => {
+                  const on = active.includes(d.id);
+                  return (
+                    <button
+                      key={d.id}
+                      onClick={() => onToggle(d.id)}
+                      className={cn(
+                        "inline-flex items-center gap-1 rounded-full border px-2.5 py-1 text-xs transition",
+                        on
+                          ? "border-robert bg-robert text-white"
+                          : "border-robert-soft bg-canvas text-ink-soft hover:border-robert hover:text-ink",
+                      )}
+                    >
+                      <span aria-hidden>{d.icon}</span>
+                      {d.label}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
+        );
+      })}
+    </div>
   );
 }
 
