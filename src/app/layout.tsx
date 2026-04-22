@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
 import { RouteProgress } from "@/components/ui/RouteProgress";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -64,6 +65,7 @@ export default function RootLayout({
           <Header />
           <main className="min-h-[60vh]">{children}</main>
           <Footer />
+          <FloatingWhatsApp />
         </ConvexClientProvider>
       </body>
     </html>

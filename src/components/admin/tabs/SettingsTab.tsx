@@ -18,6 +18,8 @@ const KNOWN_KEYS: { key: string; label: string; type: "text" | "textarea" | "boo
   { key: "cta.body", label: "CTA body", type: "textarea" },
   { key: "cta.button", label: "CTA button", type: "text" },
   { key: "contact.email", label: "Contact email", type: "text" },
+  { key: "contact.whatsapp", label: "WhatsApp number (digits only, incl. country code)", type: "text" },
+  { key: "contact.whatsappMessage", label: "WhatsApp prefilled message", type: "text" },
   { key: "footer.tagline", label: "Footer tagline", type: "textarea" },
   { key: "footer.newsletterCopy", label: "Newsletter copy", type: "text" },
   { key: "social.linkedin", label: "LinkedIn URL", type: "text" },

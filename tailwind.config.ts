@@ -60,6 +60,10 @@ const config: Config = {
           "0%, 100%": { transform: "translateY(0px)" },
           "50%": { transform: "translateY(-6px)" },
         },
+        waPing: {
+          "0%": { transform: "scale(1)", opacity: "0.5" },
+          "80%, 100%": { transform: "scale(1.8)", opacity: "0" },
+        },
       },
       animation: {
         inkSweep: "inkSweep 1.2s cubic-bezier(0.22,1,0.36,1) forwards",
@@ -67,6 +71,7 @@ const config: Config = {
         caret: "caret 1s steps(1) infinite",
         shimmer: "shimmer 1.6s linear infinite",
         float: "float 6s ease-in-out infinite",
+        waPing: "waPing 2.4s cubic-bezier(0.22,1,0.36,1) infinite",
       },
     },
   },
