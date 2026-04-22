@@ -9,8 +9,7 @@ const COMMON_ITEMS = [
   "Changing date of birth / date of issue",
   "Changing place (location, sub-county, ward)",
   "Updating parents' or spouse's details",
-  "Replacing lost, damaged or stolen certificates",
-  "Certified true copies & reprints",
+  "Name others",
 ];
 
 const FALLBACK = [
@@ -19,7 +18,7 @@ const FALLBACK = [
     icon: "🧾",
     name: "Birth Certificate",
     price: "",
-    body: "New applications, late registrations, and corrections at the Civil Registration (Sheria House) and county registrars.",
+    body: "Editing and retouching of birth-certificate details — we clean up mistakes on your existing certificate so it reads exactly how it should.",
     items: COMMON_ITEMS,
   },
   {
@@ -27,7 +26,7 @@ const FALLBACK = [
     icon: "💍",
     name: "Marriage Certificate",
     price: "",
-    body: "Civil, Christian, Islamic and Customary marriage registrations, corrections and replacements.",
+    body: "Editing and retouching of marriage-certificate details — names, dates, places and witness lines corrected on your existing certificate.",
     items: COMMON_ITEMS,
   },
   {
@@ -35,7 +34,7 @@ const FALLBACK = [
     icon: "🎓",
     name: "KCPE & KCSE Certificates",
     price: "",
-    body: "Lost-certificate replacements and corrections of names or particulars processed through KNEC, with school liaison where required.",
+    body: "Editing and retouching of KCPE / KCSE certificate details — corrections to name spellings, index numbers and other particulars.",
     items: COMMON_ITEMS,
   },
   {
@@ -43,7 +42,7 @@ const FALLBACK = [
     icon: "🛂",
     name: "Travel Documents",
     price: "",
-    body: "New passports, renewals, Emergency Travel Certificates and minors' travel documents via eCitizen & Immigration.",
+    body: "Editing and retouching of passport and travel-document details — name, date-of-birth and place-of-issue fixes on your existing document.",
     items: COMMON_ITEMS,
   },
   {
@@ -51,7 +50,7 @@ const FALLBACK = [
     icon: "📜",
     name: "Degree, Diploma & Craft Certificates",
     price: "",
-    body: "Replacement and verification of university, TVET and KNEC craft/diploma certificates, plus CUE verification and MOFA authentication.",
+    body: "Editing and retouching of degree, diploma and craft certificate details — names, dates and particulars cleaned up on your existing certificate.",
     items: COMMON_ITEMS,
   },
 ];

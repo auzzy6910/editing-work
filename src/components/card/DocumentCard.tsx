@@ -11,13 +11,13 @@ function docLabel(type: string) {
 function docImage(type: string) {
   switch (type) {
     case "birth-certificate":
-      return "/images/docs/birth.jpg";
+      return "/images/docs/birth.webp";
     case "marriage-certificate":
-      return "/images/docs/marriage.jpg";
+      return "/images/docs/marriage.webp";
     case "kcpe-kcse-certificate":
-      return "/images/docs/kcse.jpg";
+      return "/images/docs/kcse.webp";
     case "travel-document":
-      return "/images/docs/travel.jpg";
+      return "/images/docs/travel.webp";
     case "degree-diploma-craft":
       return "/images/docs/degree.jpg";
     default:
@@ -34,17 +34,17 @@ export function DocumentCard({ c, index = 0 }: { c: CaseStudy; index?: number })
       style={{ transitionDelay: `${(index % 6) * 30}ms` }}
     >
       {/* Thumbnail */}
-      <div className="relative h-48 overflow-hidden bg-snow">
+      <div className="relative h-56 overflow-hidden bg-snow">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={docImage(c.documentType)}
           alt={docLabel(c.documentType)}
           loading="lazy"
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-expo group-hover:scale-[1.04]"
+          className="absolute inset-0 h-full w-full object-contain bg-snow transition-transform duration-700 ease-expo group-hover:scale-[1.04]"
         />
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent"
+          className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-ink/55 via-ink/5 to-transparent"
         />
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-canvas/95 px-3 py-1 text-xs font-medium shadow-card backdrop-blur">
           <span aria-hidden>{countryFlag(c.country)}</span>
