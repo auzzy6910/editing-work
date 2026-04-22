@@ -53,11 +53,20 @@ const config: Config = {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0" },
         },
+        shimmer: {
+          "100%": { transform: "translateX(100%)" },
+        },
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
       },
       animation: {
         inkSweep: "inkSweep 1.2s cubic-bezier(0.22,1,0.36,1) forwards",
         pulseDot: "pulseDot 2.8s ease-in-out infinite",
         caret: "caret 1s steps(1) infinite",
+        shimmer: "shimmer 1.6s linear infinite",
+        float: "float 6s ease-in-out infinite",
       },
     },
   },

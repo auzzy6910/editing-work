@@ -4,6 +4,7 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
+import { RouteProgress } from "@/components/ui/RouteProgress";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -59,6 +60,7 @@ export default function RootLayout({
       </head>
       <body className="bg-canvas text-ink font-sans antialiased">
         <ConvexClientProvider>
+          <RouteProgress />
           <Header />
           <main className="min-h-[60vh]">{children}</main>
           <Footer />
