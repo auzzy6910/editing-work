@@ -74,11 +74,13 @@ export function LiveServices() {
         Services
       </p>
       <h1 className="mt-2 max-w-3xl font-display text-5xl md:text-7xl leading-[1.05]">
-        {numberWord(count)} {count === 1 ? "document" : "documents"} I handle, end to end.
+        {numberWord(count)} {count === 1 ? "document" : "documents"} we edit and retouch.
       </h1>
       <p className="mt-6 max-w-2xl text-lg text-ink-soft">
-        Every case starts with a free consultation — I tell you honestly what it will take,
-        what it will cost at the cashier, and how soon it can be ready.
+        We only edit the information on your existing certificate — names, dates, places
+        and other details. Send a clear scan, I clean it up so it reads exactly as it should.
+        No applications, no replacements, no government submissions — pure editing and
+        retouching work.
       </p>
 
       <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -105,10 +107,11 @@ export function LiveServices() {
       </div>
 
       <div className="mt-16 rounded-xl2 bg-ink p-10 text-white md:p-14">
-        <h3 className="font-display text-3xl md:text-4xl">Not sure what you need?</h3>
+        <h3 className="font-display text-3xl md:text-4xl">Not sure what&apos;s fixable?</h3>
         <p className="mt-3 max-w-2xl text-white/70">
-          Share the certificate and the issue. I&apos;ll tell you — honestly — whether you can
-          do it yourself on eCitizen or whether it&apos;s worth hiring me.
+          Share a clear scan of your certificate and point out what needs editing. I&apos;ll
+          tell you — honestly — whether the detail can be cleanly edited and retouched on
+          the scan or not.
         </p>
         <Link
           href="/contact"

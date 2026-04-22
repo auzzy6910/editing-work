@@ -12,21 +12,21 @@ const url =
 const TESTIMONIALS = [
   {
     quote:
-      "I had given up on getting my KCSE replacement. Robert had it in my hands in three weeks with a fresh KNEC stamp.",
+      "My KCSE certificate had my surname spelt wrong since 2009. Robert edited the scan so cleanly you can't tell anything was ever touched.",
     who: "Brian O. · Kisumu",
     order: 10,
     active: true,
   },
   {
     quote:
-      "My passport was renewed in five working days before a medical conference. The fast-track queue actually works when you know the procedure.",
+      "Single wrong digit on my passport bio-page date of birth. I sent the scan in the morning, got a pixel-perfect edit back the same afternoon.",
     who: "Dr. Njeri · Nairobi",
     order: 20,
     active: true,
   },
   {
     quote:
-      "A clerk had misspelt my surname on my birth certificate in 2003. Robert got the correction through Sheria House without a single back-and-forth from me.",
+      "A clerk misspelt my surname on my birth certificate in 2003. Robert retouched the scan in two days — matches the original typewriter exactly.",
     who: "Wanjiru family · Nairobi",
     order: 30,
     active: true,
@@ -97,29 +97,29 @@ const SERVICES = [
 const PROCESS = [
   {
     number: "01",
-    title: "Consultation",
-    body: "Tell me the certificate, the issue and your deadline. I reply the same day with the exact documents you'll need and the government fee.",
+    title: "Brief",
+    body: "Tell me which certificate it is and exactly which details need editing — name spelling, date, place, parents / spouse, and others. Same-day quote.",
     order: 10,
     active: true,
   },
   {
     number: "02",
-    title: "Paperwork prep",
-    body: "We compile affidavits, ID copies, passport photos and supporting letters together — nothing you didn't already have at home.",
+    title: "Clear scan",
+    body: "Send a clear scan or phone photo of the document. I confirm the edits and the final copy you'll get back before any work starts.",
     order: 20,
     active: true,
   },
   {
     number: "03",
-    title: "Submission & follow-up",
-    body: "I lodge the application at the relevant office (Sheria House, KNEC, Nyayo House, CUE) and follow up in person every few days until it is ready.",
+    title: "Edit & retouch",
+    body: "I edit the details digitally — preserving the original typeface, stamps, seals and paper texture so the final reads exactly like the original printing.",
     order: 30,
     active: true,
   },
   {
     number: "04",
-    title: "Collection & delivery",
-    body: "I collect the certificate, check the details are correct, and deliver to you in Nairobi or courier nationwide. Sealed, stamped, ready to use.",
+    title: "Your edited copy",
+    body: "You get the edited high-resolution file back for review, with one free round of touch-ups if you spot anything else that needs fixing.",
     order: 40,
     active: true,
   },
@@ -128,35 +128,36 @@ const PROCESS = [
 const SETTINGS = [
   {
     key: "hero.badge",
-    value: "Taking new cases this month — Nairobi & nationwide",
+    value: "Taking new edits this month — Nairobi & Kenya-wide",
   },
   { key: "hero.slotsOpen", value: "true" },
   {
     key: "hero.intro",
     value:
-      "I'm Robert. I help Kenyans register, correct, replace, and verify official documents — birth, marriage, KCPE/KCSE, passports, degrees & craft certs. Pull the slider to see a real correction.",
+      "I'm Robert. I edit and retouch the details on your existing Kenyan documents — birth, marriage, KCPE / KCSE, passports, and degree / diploma / craft certificates. Pull the slider to see a real edit.",
   },
   { key: "stats.totalCountries", value: "47" },
   { key: "stats.totalLanguages", value: "2" },
   { key: "stats.multiplierDocs", value: "37" },
   { key: "stats.multiplierWords", value: "12" },
-  { key: "cta.kicker", value: "Your file · next week" },
-  { key: "cta.title", value: "Tell me what you need." },
+  { key: "cta.kicker", value: "Your edit · back this week" },
+  { key: "cta.title", value: "Tell me what to edit." },
   {
     key: "cta.body",
     value:
-      "Share a short note with the certificate, the issue, and your deadline. I'll quote a clear fee and a realistic timeline the same day.",
+      "Share a clear scan of the certificate and which details need editing. I'll reply the same day with a quote for the edit and a realistic turnaround.",
   },
   { key: "cta.button", value: "Book editing →" },
   { key: "contact.email", value: "hello@robertediting.co.ke" },
   {
     key: "footer.tagline",
     value:
-      "Robert handles Kenyan documents end-to-end: birth & marriage certificates, KCPE/KCSE replacements, passports & travel docs, degree, diploma and craft certificates. Nationwide.",
+      "Robert edits and retouches the details on your existing Kenyan certificates — birth & marriage, KCPE / KCSE, passports & travel docs, degree, diploma and craft. Kenya-wide.",
   },
   {
     key: "footer.newsletterCopy",
-    value: "Paperwork notes — occasional updates on fees, timelines & agency changes.",
+    value:
+      "Editing notes — occasional tips on keeping your certificate scans clean and edit-ready.",
   },
   {
     key: "social.facebook",

@@ -7,7 +7,7 @@ export function FooterTagline() {
   const s = useQuery(api.settings.all);
   const text =
     s?.["footer.tagline"] ??
-    "Robert handles Kenyan documents end-to-end: birth & marriage certificates, KCPE/KCSE replacements, passports & travel docs, degree, diploma and craft certificates. Nationwide.";
+    "Robert edits and retouches the details on your existing Kenyan certificates — birth & marriage, KCPE / KCSE, passports & travel docs, degree, diploma and craft. Kenya-wide.";
   return <p className="mt-4 max-w-md text-sm text-ink-soft">{text}</p>;
 }
 
@@ -15,7 +15,7 @@ export function FooterNewsletterCopy() {
   const s = useQuery(api.settings.all);
   const text =
     s?.["footer.newsletterCopy"] ??
-    "Paperwork notes — occasional updates on fees, timelines & agency changes.";
+    "Editing notes — occasional tips on keeping your certificate scans clean and edit-ready.";
   return <p className="mt-2 text-xs text-ink-muted">{text}</p>;
 }
 

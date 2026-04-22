@@ -232,7 +232,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Agency">
+          <Section title="Certificate family">
             <div className="flex flex-wrap gap-1.5">
               {INDUSTRIES.map((i) => {
                 const active = f.industries.includes(i.id);
@@ -254,7 +254,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Service type">
+          <Section title="Edit type">
             <div className="grid grid-cols-2 gap-1.5">
               {EDITING_LEVELS.map((l) => {
                 const active = f.levels.includes(l.id);

@@ -113,7 +113,7 @@ export default function Home() {
         <div className="mx-auto max-w-7xl px-6">
           <Reveal>
             <p className="text-center text-xs font-semibold uppercase tracking-[0.25em] text-ink-muted">
-              Trusted across Kenya · KNEC · Immigration · Sheria House
+              Editing Kenyan certificates · 47 counties · same-day replies
             </p>
           </Reveal>
           <LiveTrustBar />

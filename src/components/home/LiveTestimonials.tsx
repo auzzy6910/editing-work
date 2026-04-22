@@ -10,19 +10,19 @@ const FALLBACK = [
   {
     id: "f1",
     quote:
-      "I had given up on getting my KCSE replacement. Robert had it in my hands in three weeks with a fresh KNEC stamp.",
+      "My KCSE certificate had my surname spelt wrong since 2009. Robert edited the scan so cleanly you can't tell anything was ever touched.",
     who: "Brian O. · Kisumu",
   },
   {
     id: "f2",
     quote:
-      "My passport was renewed in five working days before a medical conference. The fast-track queue actually works when you know the procedure.",
+      "Single wrong digit on my passport bio-page date of birth. I sent the scan in the morning, got a pixel-perfect edit back the same afternoon.",
     who: "Dr. Njeri · Nairobi",
   },
   {
     id: "f3",
     quote:
-      "A clerk had misspelt my surname on my birth certificate in 2003. Robert got the correction through Sheria House without a single back-and-forth from me.",
+      "A clerk misspelt my surname on my birth certificate in 2003. Robert retouched the scan in two days — matches the original typewriter exactly.",
     who: "Wanjiru family · Nairobi",
   },
 ];
@@ -51,7 +51,7 @@ export function LiveTestimonials() {
           Testimonials
         </p>
         <h2 className="mt-2 max-w-3xl font-display text-4xl md:text-5xl">
-          &ldquo;Three weeks. Fresh stamp. No drama.&rdquo;
+          &ldquo;Pixel-perfect. Same-day. No drama.&rdquo;
         </h2>
       </Reveal>
 

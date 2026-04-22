@@ -75,13 +75,13 @@ export function ContactForm() {
       </label>
       <label className="mt-4 block">
         <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-ink-muted">
-          Service needed
+          Type of edit
         </span>
         <select
           name="service"
           className="h-11 w-full rounded-lg border border-robert-soft bg-snow px-4 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
         >
-          <option value="">Select a service</option>
+          <option value="">Select an edit type</option>
           {SERVICE_TYPES.map((s) => (
             <option key={s.id} value={s.id}>
               {s.label}
@@ -105,7 +105,7 @@ export function ContactForm() {
           rows={5}
           minLength={10}
           className="w-full rounded-lg border border-robert-soft bg-snow px-4 py-3 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
-          placeholder="What's the certificate for? What's the issue or missing piece? Which county / office issued it?"
+          placeholder="Which certificate is it? Which exact details need editing (name, date, place, etc.)? How soon do you need it back?"
         />
       </label>
       {error && (

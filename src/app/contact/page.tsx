@@ -11,9 +11,9 @@ export default function ContactPage() {
           Tell me what you need.
         </h1>
         <p className="mt-6 text-lg text-ink-soft">
-          Share a short note: which certificate, what the issue is, and how soon you need it. I
-          reply the same day (Sunday excluded) with a clear quote, the government fees, and a
-          realistic timeline.
+          Share a short note: which certificate, which details need editing, and how soon
+          you need it back. I reply the same day (Sunday excluded) with a clear quote and a
+          realistic turnaround for the edit.
         </p>
         <a
           href="https://wa.me/254714207523?text=Hi%20Robert%2C%20I%27d%20like%20to%20discuss%20a%20document%20request."
@@ -34,7 +34,7 @@ export default function ContactPage() {
           </div>
           <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Turnaround</dt>
-            <dd className="mt-1 font-mono">Reply same day · 2–21d delivery</dd>
+            <dd className="mt-1 font-mono">Reply same day · edits in 1–3 days</dd>
           </div>
           <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Time zone</dt>
@@ -42,7 +42,7 @@ export default function ContactPage() {
           </div>
           <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Availability</dt>
-            <dd className="mt-1 font-mono">Taking new cases</dd>
+            <dd className="mt-1 font-mono">Taking new edits</dd>
           </div>
         </dl>
       </div>

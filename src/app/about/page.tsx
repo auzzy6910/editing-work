@@ -7,14 +7,12 @@ export const metadata = {
 
 const LANGUAGES = ["English", "Kiswahili"];
 
-const AGENCIES = [
-  "Civil Registration Services (Sheria House)",
-  "Kenya National Examinations Council (KNEC)",
-  "Directorate of Immigration Services (Nyayo House)",
-  "Commission for University Education (CUE)",
-  "Ministry of Foreign Affairs (MOFA)",
-  "NITA — National Industrial Training Authority",
-  "Ministry of Interior — Chiefs & DO's offices",
+const CERT_FAMILIES = [
+  "Birth Certificates",
+  "Marriage Certificates",
+  "KCPE & KCSE Certificates",
+  "Travel Documents (Passports & ETCs)",
+  "Degree, Diploma & Craft Certificates",
 ];
 
 export default function AboutPage() {
@@ -22,25 +20,27 @@ export default function AboutPage() {
     <div className="mx-auto max-w-4xl px-6 py-24">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">About</p>
       <h1 className="mt-2 font-display text-5xl md:text-7xl leading-[1.05]">
-        Your paperwork. My problem.
+        Your paperwork. Edited clean.
       </h1>
       <div className="mt-10 space-y-6 text-lg text-ink-soft">
         <p>
-          I&apos;m Robert — a Kenya-based documents consultant. For the last decade I have helped
-          families, students, graduates and travellers register, correct, replace, and verify
-          official documents without losing their sanity to the queues.
+          I&apos;m Robert — a Kenya-based document editor and retoucher. My work is
+          narrow and precise: I clean up the <em>information</em> printed on your
+          existing certificates so it reads exactly how it should.
         </p>
         <p>
-          I work across five document families: <strong>birth certificates</strong>,
-          <strong> marriage certificates</strong>, <strong>KCPE &amp; KCSE certificates</strong>,
-          <strong> travel documents</strong> (passports &amp; ETCs), and{" "}
-          <strong>degree, diploma &amp; craft certificates</strong>. Whether you need a fresh
-          application, a correction, a lost-document replacement, or an authentication for use
-          abroad, I handle the paperwork, the follow-ups, and the collection.
+          I work on five certificate families: <strong>birth certificates</strong>,{" "}
+          <strong>marriage certificates</strong>, <strong>KCPE &amp; KCSE certificates</strong>,{" "}
+          <strong>travel documents</strong> (passports &amp; ETCs), and{" "}
+          <strong>degree, diploma &amp; craft certificates</strong>. On each, I edit
+          details like a misspelled name, a wrong date, the wrong place of issue, or
+          parents&apos; / spouse&apos;s particulars — matching the original typeface,
+          stamps and paper texture so the result looks like the original printing.
         </p>
         <p>
-          Every file is tracked end-to-end. You get a WhatsApp update after every visit to the
-          office. No fixers. No ghosting. No extra fees beyond what the government gazettes.
+          I do not submit applications for you. I do not collect or deliver originals
+          from government offices. I do not issue replacements. Every job I take is
+          purely editing and retouching on the scan you send me. Clean in, clean out.
         </p>
       </div>
 
@@ -60,10 +60,10 @@ export default function AboutPage() {
 
       <section className="mt-16">
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
-          Agencies we work with daily
+          Certificate families we edit
         </p>
         <ul className="mt-4 grid gap-2 md:grid-cols-2">
-          {AGENCIES.map((a) => (
+          {CERT_FAMILIES.map((a) => (
             <li
               key={a}
               className="rounded-md border border-robert-soft/60 bg-canvas px-3 py-2 text-sm text-ink-soft"
@@ -83,8 +83,8 @@ export default function AboutPage() {
 
       <div className="mt-16 rounded-xl2 border border-robert-soft/60 bg-snow p-8">
         <p className="font-display text-2xl italic text-ink">
-          &ldquo;If the document exists on paper somewhere in Kenya, we can find it, correct it, or
-          replace it.&rdquo;
+          &ldquo;If the detail is printed on the scan, I can edit it so it reads
+          exactly how it should.&rdquo;
         </p>
         <p className="mt-3 text-sm text-ink-muted">— Robert</p>
       </div>
@@ -100,7 +100,7 @@ export default function AboutPage() {
           href="/work"
           className="rounded-full border border-robert-soft bg-canvas px-5 py-2.5 text-sm transition hover:border-robert"
         >
-          See recent cases
+          See recent edits
         </Link>
       </div>
     </div>

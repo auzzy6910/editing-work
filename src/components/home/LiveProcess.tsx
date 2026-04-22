@@ -10,26 +10,26 @@ const FALLBACK = [
   {
     id: "f1",
     number: "01",
-    title: "Consultation",
-    body: "Tell me the certificate, the issue and your deadline. I reply the same day with the exact documents needed and the government fee.",
+    title: "Brief",
+    body: "Tell me which certificate it is and exactly which details need editing — name spelling, date, place, parents / spouse, and others. Same-day quote.",
   },
   {
     id: "f2",
     number: "02",
-    title: "Paperwork prep",
-    body: "We compile affidavits, ID copies, passport photos and supporting letters together — nothing you didn't already have at home.",
+    title: "Clear scan",
+    body: "Send a clear scan or phone photo of the document. I confirm the edits and the final copy you'll get back before any work starts.",
   },
   {
     id: "f3",
     number: "03",
-    title: "Submission & follow-up",
-    body: "I lodge the application at the right office (Sheria House, KNEC, Nyayo House, CUE) and follow up in person until it is ready.",
+    title: "Edit & retouch",
+    body: "I edit the details digitally — preserving the original typeface, stamps, seals and paper texture so the final reads exactly like the original printing.",
   },
   {
     id: "f4",
     number: "04",
-    title: "Collection & delivery",
-    body: "I collect the certificate, verify details, and hand-deliver in Nairobi or courier nationwide.",
+    title: "Your edited copy",
+    body: "You get the edited high-resolution file back for review, with one free round of touch-ups if you spot anything else that needs fixing.",
   },
 ];
 
@@ -51,7 +51,7 @@ export function LiveProcess() {
             Process
           </p>
           <h2 className="mt-2 max-w-2xl font-display text-4xl md:text-5xl">
-            {rows.length} steps. One promise: you never queue.
+            {rows.length} steps. One promise: pixel-perfect edits, nothing more.
           </h2>
         </Reveal>
         <AnimatePresence mode="wait">

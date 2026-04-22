@@ -24,14 +24,14 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Robert Editing — Kenyan document services, handled like a pro.",
+  title: "Robert Editing — Kenyan document editing & retouching.",
   description:
-    "Birth, marriage, KCPE & KCSE, travel documents and degree/diploma/craft certificates — applied for, corrected, replaced, verified. Nationwide in Kenya.",
+    "Editing and retouching of details on your existing Kenyan certificates — birth, marriage, KCPE / KCSE, passports and degree / diploma / craft certificates.",
   metadataBase: new URL("https://robertediting.co.ke"),
   openGraph: {
-    title: "Robert Editing — Kenyan document services",
+    title: "Robert Editing — Kenyan document editing & retouching",
     description:
-      "Applications, corrections, replacements and verifications of Kenyan certificates. Handled end-to-end.",
+      "Clean, pixel-perfect edits to the details on your existing Kenyan certificates — names, dates, places and more.",
     type: "website",
   },
 };

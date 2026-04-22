@@ -102,11 +102,11 @@ export function CaseDetailView({
             />
             <Row term="Language" value={c.languageName} />
             <Row
-              term="Agency"
+              term="Family"
               value={<span className="capitalize">{c.industry.replace(/-/g, " ")}</span>}
             />
             <Row
-              term="Service"
+              term="Edit"
               value={<span className="capitalize">{c.editingLevel.replace(/-/g, " ")}</span>}
             />
             <Row term="Rating" value={"★".repeat(c.rating)} />

@@ -54,18 +54,18 @@ export const DOCUMENT_TYPES: { id: DocumentType; label: string; icon: string }[]
 ];
 
 export const INDUSTRIES: { id: Industry; label: string }[] = [
-  { id: "civil-registration", label: "Civil Registration" },
-  { id: "education", label: "Basic Education (KNEC)" },
-  { id: "immigration", label: "Immigration" },
-  { id: "tertiary-education", label: "Tertiary Education" },
+  { id: "civil-registration", label: "Civil certificates" },
+  { id: "education", label: "School certificates" },
+  { id: "immigration", label: "Travel documents" },
+  { id: "tertiary-education", label: "Tertiary certificates" },
 ];
 
 export const EDITING_LEVELS: { id: ServiceType; label: string }[] = [
-  { id: "new-application", label: "New application" },
-  { id: "correction", label: "Correction / amendment" },
-  { id: "replacement", label: "Lost / damaged replacement" },
-  { id: "expedited", label: "Expedited processing" },
-  { id: "verification", label: "Verification / authentication" },
+  { id: "correction", label: "Text edit" },
+  { id: "replacement", label: "Scan retouch" },
+  { id: "expedited", label: "Rush edit" },
+  { id: "new-application", label: "Full rebuild" },
+  { id: "verification", label: "Detail check" },
 ];
 
 export const SERVICE_TYPES = EDITING_LEVELS;

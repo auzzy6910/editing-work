@@ -57,7 +57,7 @@ export function LiveHeroStats() {
 
   return (
     <div className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-robert-soft/50 pt-6 font-mono text-xs text-ink-muted">
-      <Stat value={totalDocs} label="docs handled" live={isLive} />
+      <Stat value={totalDocs} label="docs edited" live={isLive} />
       <Stat
         value={Math.max(totalWordsCut * multWords, 1200)}
         label="clients served"
@@ -95,7 +95,7 @@ export function LiveFeaturedWork() {
             Featured work
           </p>
           <h2 className="mt-2 font-display text-4xl md:text-5xl">
-            Six recent cases we sorted out.
+            Six recent certificates we edited.
           </h2>
         </div>
         <Link
