@@ -1,12 +1,28 @@
 import Link from "next/link";
 import { CaseStudy, DOCUMENT_TYPES } from "@/lib/types";
-import { cn, countryFlag } from "@/lib/utils";
+import { countryFlag } from "@/lib/utils";
 
 function docIcon(type: string) {
   return DOCUMENT_TYPES.find((d) => d.id === type)?.icon ?? "📄";
 }
 function docLabel(type: string) {
   return DOCUMENT_TYPES.find((d) => d.id === type)?.label ?? type;
+}
+function docImage(type: string) {
+  switch (type) {
+    case "birth-certificate":
+      return "/images/docs/birth.jpg";
+    case "marriage-certificate":
+      return "/images/docs/marriage.jpg";
+    case "kcpe-kcse-certificate":
+      return "/images/docs/kcse.jpg";
+    case "travel-document":
+      return "/images/docs/travel.jpg";
+    case "degree-diploma-craft":
+      return "/images/docs/degree.jpg";
+    default:
+      return "/images/docs/degree.jpg";
+  }
 }
 
 export function DocumentCard({ c, index = 0 }: { c: CaseStudy; index?: number }) {
@@ -19,50 +35,27 @@ export function DocumentCard({ c, index = 0 }: { c: CaseStudy; index?: number })
     >
       {/* Thumbnail */}
       <div className="relative h-48 overflow-hidden bg-snow">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={docImage(c.documentType)}
+          alt={docLabel(c.documentType)}
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-expo group-hover:scale-[1.04]"
+        />
         <div
           aria-hidden
-          className="absolute inset-6 rounded-lg bg-canvas shadow-card transition-transform duration-700 ease-expo group-hover:-rotate-1"
-        >
-          <div className="h-6 border-b border-robert-soft/40 bg-robert-ghost/60" />
-          <div className="space-y-2 p-4">
-            {Array.from({ length: 7 }).map((_, i) => (
-              <div
-                key={i}
-                className={cn(
-                  "h-1.5 rounded-full bg-ink/10",
-                  i === 2 && "w-3/4",
-                  i === 4 && "w-2/3",
-                  i === 6 && "w-1/2",
-                )}
-              />
-            ))}
-          </div>
-        </div>
-        <div
-          aria-hidden
-          className="absolute inset-8 translate-x-4 translate-y-4 rotate-3 rounded-lg bg-canvas shadow-card transition-transform duration-700 ease-expo group-hover:translate-x-6 group-hover:translate-y-6"
-        >
-          <div className="h-6 border-b border-robert/30 bg-robert/10" />
-          <div className="space-y-2 p-4">
-            {Array.from({ length: 7 }).map((_, i) => (
-              <div
-                key={i}
-                className={cn(
-                  "h-1.5 rounded-full bg-robert/30",
-                  i === 1 && "w-3/4",
-                  i === 3 && "w-4/5",
-                  i === 5 && "w-2/3",
-                )}
-              />
-            ))}
-          </div>
-        </div>
+          className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/10 to-transparent"
+        />
         <div className="absolute left-4 top-4 flex items-center gap-2 rounded-full bg-canvas/95 px-3 py-1 text-xs font-medium shadow-card backdrop-blur">
           <span aria-hidden>{countryFlag(c.country)}</span>
           <span className="text-ink-soft">{c.countryName}</span>
         </div>
         <div className="absolute right-4 top-4 rounded-full bg-ink/90 px-3 py-1 text-xs text-white">
           {c.turnaroundHours < 48 ? "24h" : c.turnaroundHours < 72 ? "48h" : `${Math.round(c.turnaroundHours / 24)}d`}
+        </div>
+        <div className="absolute bottom-3 left-4 flex items-center gap-2 rounded-full bg-canvas/95 px-3 py-1 text-xs font-medium shadow-card backdrop-blur">
+          <span aria-hidden>{docIcon(c.documentType)}</span>
+          <span className="text-ink-soft">{docLabel(c.documentType)}</span>
         </div>
       </div>
 

@@ -4,71 +4,55 @@ import Link from "next/link";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 
+const COMMON_ITEMS = [
+  "Correcting misspelled names",
+  "Changing date of birth / date of issue",
+  "Changing place (location, sub-county, ward)",
+  "Updating parents' or spouse's details",
+  "Replacing lost, damaged or stolen certificates",
+  "Certified true copies & reprints",
+];
+
 const FALLBACK = [
   {
     slug: "birth-certificate",
     icon: "🧾",
     name: "Birth Certificate",
-    price: "from KES 3,500",
-    body: "New applications, late registrations, name/date corrections and replacements at Sheria House and county registrars.",
-    items: [
-      "New late-registration applications",
-      "Name / date-of-birth corrections",
-      "Lost or damaged replacements",
-      "Certified true copies",
-    ],
+    price: "",
+    body: "New applications, late registrations, and corrections at the Civil Registration (Sheria House) and county registrars.",
+    items: COMMON_ITEMS,
   },
   {
     slug: "marriage-certificate",
     icon: "💍",
     name: "Marriage Certificate",
-    price: "from KES 4,500",
-    body: "Civil, Christian, Islamic and Customary marriage registrations, plus replacements and certified true copies.",
-    items: [
-      "New civil / customary registrations",
-      "Certified true copies",
-      "Replacement of lost certificates",
-      "Name-alignment affidavits",
-    ],
+    price: "",
+    body: "Civil, Christian, Islamic and Customary marriage registrations, corrections and replacements.",
+    items: COMMON_ITEMS,
   },
   {
     slug: "kcpe-kcse",
     icon: "🎓",
     name: "KCPE & KCSE Certificates",
-    price: "from KES 5,500",
-    body: "Replacements of lost KCPE / KCSE certificates and corrections of names or particulars processed through KNEC, with school liaison where required.",
-    items: [
-      "Lost certificate replacements",
-      "Name / particulars corrections",
-      "Grade-slip reissue",
-      "KNEC verification letters",
-    ],
+    price: "",
+    body: "Lost-certificate replacements and corrections of names or particulars processed through KNEC, with school liaison where required.",
+    items: COMMON_ITEMS,
   },
   {
     slug: "travel-document",
     icon: "🛂",
     name: "Travel Documents",
-    price: "from KES 6,500",
-    body: "Passport applications and renewals, Emergency Travel Certificates (ETC), East African passports and minors' travel documents via eCitizen & Immigration.",
-    items: [
-      "New biometric passports (A, B, C)",
-      "Passport renewals & fast-track",
-      "Emergency Travel Certificates",
-      "Minors' passports & parental consents",
-    ],
+    price: "",
+    body: "New passports, renewals, Emergency Travel Certificates and minors' travel documents via eCitizen & Immigration.",
+    items: COMMON_ITEMS,
   },
   {
     slug: "degree-diploma-craft",
     icon: "📜",
     name: "Degree, Diploma & Craft Certificates",
-    price: "from KES 7,500",
-    body: "Replacement and verification of university, TVET and KNEC craft/diploma certificates, plus CUE verification and MOFA authentication for use abroad.",
-    items: [
-      "University replacements (UoN, KU, Egerton, others)",
-      "KNEC / TVET craft & diploma replacements",
-      "CUE verification letters",
-      "MOFA / embassy authentication",
-    ],
+    price: "",
+    body: "Replacement and verification of university, TVET and KNEC craft/diploma certificates, plus CUE verification and MOFA authentication.",
+    items: COMMON_ITEMS,
   },
 ];
 
@@ -108,7 +92,6 @@ export function LiveServices() {
               {s.icon}
             </div>
             <h2 className="mt-4 font-display text-2xl">{s.name}</h2>
-            <p className="mt-1 font-mono text-xs text-robert">{s.price}</p>
             <p className="mt-3 text-sm text-ink-soft">{s.body}</p>
             <ul className="mt-4 space-y-1 text-sm text-ink-soft">
               {s.items.map((it: string) => (

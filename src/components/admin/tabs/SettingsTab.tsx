@@ -22,8 +22,7 @@ const KNOWN_KEYS: { key: string; label: string; type: "text" | "textarea" | "boo
   { key: "contact.whatsappMessage", label: "WhatsApp prefilled message", type: "text" },
   { key: "footer.tagline", label: "Footer tagline", type: "textarea" },
   { key: "footer.newsletterCopy", label: "Newsletter copy", type: "text" },
-  { key: "social.linkedin", label: "LinkedIn URL", type: "text" },
-  { key: "social.twitter", label: "X / Twitter URL", type: "text" },
+  { key: "social.facebook", label: "Facebook URL", type: "text" },
 ];
 
 export function SettingsTab({ token }: { token: string }) {
