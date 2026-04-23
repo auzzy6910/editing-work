@@ -5,7 +5,7 @@ import { api } from "../../../convex/_generated/api";
 
 export function LiveHeroBadge() {
   const s = useQuery(api.settings.all);
-  const text = s?.["hero.badge"] ?? "Accepting drafts for Q3 — 2 slots";
+  const text = s?.["hero.badge"] ?? "Taking new edits this month — Nairobi & Kenya-wide";
   const open =
     s?.["hero.slotsOpen"] === undefined ? true : s["hero.slotsOpen"] === "true";
   return (
@@ -25,7 +25,7 @@ export function LiveHeroIntro() {
   const s = useQuery(api.settings.all);
   const intro =
     s?.["hero.intro"] ??
-    "I'm Robert. I edit documents — academic, legal, creative, corporate — in 47 countries and 11 languages. Pull the slider to see how.";
+    "I'm Robert. I edit and retouch the details on your existing Kenyan documents — birth, marriage, KCPE / KCSE, passports, and degree / diploma / craft certificates. Pull the slider to see a real edit.";
   return (
     <p className="mt-6 max-w-xl text-pretty text-lg text-ink-soft">{intro}</p>
   );

@@ -1,17 +1,57 @@
 "use client";
 
-import Link from "next/link";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import { WHATSAPP_BOOK_URL } from "@/lib/utils";
+
+const COMMON_ITEMS = [
+  "Correcting misspelled names",
+  "Changing date of birth / date of issue",
+  "Changing place (location, sub-county, ward)",
+  "Updating parents' or spouse's details",
+  "Name others",
+];
 
 const FALLBACK = [
   {
-    slug: "academic",
+    slug: "birth-certificate",
+    icon: "🧾",
+    name: "Birth Certificate",
+    price: "",
+    body: "Editing and retouching of birth-certificate details — we clean up mistakes on your existing certificate so it reads exactly how it should.",
+    items: COMMON_ITEMS,
+  },
+  {
+    slug: "marriage-certificate",
+    icon: "💍",
+    name: "Marriage Certificate",
+    price: "",
+    body: "Editing and retouching of marriage-certificate details — names, dates, places and witness lines corrected on your existing certificate.",
+    items: COMMON_ITEMS,
+  },
+  {
+    slug: "kcpe-kcse",
     icon: "🎓",
-    name: "Academic editing",
-    price: "from $0.035 / word",
-    body: "Theses, dissertations, peer-reviewed papers.",
-    items: ["Structural notes", "Sentence-level edits", "Reference checks"],
+    name: "KCPE & KCSE Certificates",
+    price: "",
+    body: "Editing and retouching of KCPE / KCSE certificate details — corrections to name spellings, index numbers and other particulars.",
+    items: COMMON_ITEMS,
+  },
+  {
+    slug: "travel-document",
+    icon: "🛂",
+    name: "Travel Documents",
+    price: "",
+    body: "Editing and retouching of passport and travel-document details — name, date-of-birth and place-of-issue fixes on your existing document.",
+    items: COMMON_ITEMS,
+  },
+  {
+    slug: "degree-diploma-craft",
+    icon: "📜",
+    name: "Degree, Diploma & Craft Certificates",
+    price: "",
+    body: "Editing and retouching of degree, diploma and craft certificate details — names, dates and particulars cleaned up on your existing certificate.",
+    items: COMMON_ITEMS,
   },
 ];
 
@@ -34,11 +74,13 @@ export function LiveServices() {
         Services
       </p>
       <h1 className="mt-2 max-w-3xl font-display text-5xl md:text-7xl leading-[1.05]">
-        {numberWord(count)} {count === 1 ? "way" : "ways"} I can make your writing sharper.
+        {numberWord(count)} {count === 1 ? "document" : "documents"} we edit and retouch.
       </h1>
       <p className="mt-6 max-w-2xl text-lg text-ink-soft">
-        Every engagement starts with a free 100-word sample edit so you can feel the difference
-        before you commit.
+        We only edit the information on your existing certificate — names, dates, places
+        and other details. Send a clear scan, I clean it up so it reads exactly as it should.
+        No applications, no replacements, no government submissions — pure editing and
+        retouching work.
       </p>
 
       <div className="mt-14 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -51,7 +93,6 @@ export function LiveServices() {
               {s.icon}
             </div>
             <h2 className="mt-4 font-display text-2xl">{s.name}</h2>
-            <p className="mt-1 font-mono text-xs text-robert">{s.price}</p>
             <p className="mt-3 text-sm text-ink-soft">{s.body}</p>
             <ul className="mt-4 space-y-1 text-sm text-ink-soft">
               {s.items.map((it: string) => (
@@ -66,16 +107,20 @@ export function LiveServices() {
       </div>
 
       <div className="mt-16 rounded-xl2 bg-ink p-10 text-white md:p-14">
-        <h3 className="font-display text-3xl md:text-4xl">Not sure which service you need?</h3>
+        <h3 className="font-display text-3xl md:text-4xl">Not sure what&apos;s fixable?</h3>
         <p className="mt-3 max-w-2xl text-white/70">
-          Send me 100 words. I&apos;ll tell you — honestly — whether you need me at all.
+          Share a clear scan of your certificate and point out what needs editing. I&apos;ll
+          tell you — honestly — whether the detail can be cleanly edited and retouched on
+          the scan or not.
         </p>
-        <Link
-          href="/contact"
+        <a
+          href={WHATSAPP_BOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-ink transition hover:bg-robert-soft"
         >
-          Send the sample →
-        </Link>
+          Ask on WhatsApp →
+        </a>
       </div>
     </div>
   );

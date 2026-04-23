@@ -4,6 +4,8 @@ import "./globals.css";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ConvexClientProvider } from "@/components/ConvexClientProvider";
+import { RouteProgress } from "@/components/ui/RouteProgress";
+import { FloatingWhatsApp } from "@/components/ui/FloatingWhatsApp";
 
 const display = Fraunces({
   subsets: ["latin"],
@@ -22,14 +24,14 @@ const mono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Robert Editing — Before I touch it, it's a draft.",
+  title: "Robert Editing — Kenyan document editing & retouching.",
   description:
-    "The quiet editor behind loud ideas. Documents edited in 47 countries. See the before/after.",
-  metadataBase: new URL("https://robertediting.example"),
+    "Editing and retouching of details on your existing Kenyan certificates — birth, marriage, KCPE / KCSE, passports and degree / diploma / craft certificates.",
+  metadataBase: new URL("https://robertediting.co.ke"),
   openGraph: {
-    title: "Robert Editing",
+    title: "Robert Editing — Kenyan document editing & retouching",
     description:
-      "Before I touch it, it's a draft. After I touch it, it's the version people remember.",
+      "Clean, pixel-perfect edits to the details on your existing Kenyan certificates — names, dates, places and more.",
     type: "website",
   },
 };
@@ -59,9 +61,11 @@ export default function RootLayout({
       </head>
       <body className="bg-canvas text-ink font-sans antialiased">
         <ConvexClientProvider>
+          <RouteProgress />
           <Header />
           <main className="min-h-[60vh]">{children}</main>
           <Footer />
+          <FloatingWhatsApp />
         </ConvexClientProvider>
       </body>
     </html>

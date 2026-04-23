@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useMutation } from "convex/react";
 import { api } from "../../convex/_generated/api";
+import { DOCUMENT_TYPES, SERVICE_TYPES } from "@/lib/types";
 import { cn } from "@/lib/utils";
 
 export function ContactForm() {
@@ -18,10 +19,9 @@ export function ContactForm() {
     try {
       await submit({
         name: String(fd.get("name") ?? ""),
-        email: String(fd.get("email") ?? ""),
         documentType: String(fd.get("type") ?? "") || undefined,
-        language: String(fd.get("language") ?? "") || undefined,
-        approximateWordCount: String(fd.get("words") ?? "") || undefined,
+        language: String(fd.get("service") ?? "") || undefined,
+        approximateWordCount: String(fd.get("deadline") ?? "") || undefined,
         message: String(fd.get("message") ?? ""),
       });
       setState("sent");
@@ -37,9 +37,10 @@ export function ContactForm() {
         <span className="rounded-full bg-robert-ghost px-3 py-1 text-xs font-semibold uppercase tracking-widest text-robert">
           Received
         </span>
-        <h2 className="mt-4 font-display text-4xl">Thanks — I&apos;ll write back within 24h.</h2>
+        <h2 className="mt-4 font-display text-4xl">Thanks — I&apos;ll reply today.</h2>
         <p className="mt-2 text-ink-soft">
-          Stored in Convex. In the meantime, read a case study, or go write something you&apos;re scared of.
+          Your request is logged. I&apos;ll follow up on WhatsApp within a few hours with a
+          clear quote and timeline.
         </p>
       </div>
     );
@@ -50,13 +51,46 @@ export function ContactForm() {
       onSubmit={onSubmit}
       className="rounded-xl2 border border-robert-soft/60 bg-canvas p-8 shadow-card"
     >
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Your name" name="name" required />
-        <Field label="Email" name="email" type="email" required />
-      </div>
-      <Field label="Document type" name="type" className="mt-4" placeholder="Thesis, contract, novel…" />
-      <Field label="Language" name="language" className="mt-4" placeholder="English" />
-      <Field label="Approximate word count" name="words" className="mt-4" placeholder="12,000" />
+      <Field label="Your nickname" name="name" required />
+      <label className="mt-4 block">
+        <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-ink-muted">
+          Document type
+        </span>
+        <select
+          name="type"
+          required
+          className="h-11 w-full rounded-lg border border-robert-soft bg-snow px-4 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
+        >
+          <option value="">Select a certificate</option>
+          {DOCUMENT_TYPES.map((d) => (
+            <option key={d.id} value={d.id}>
+              {d.label}
+            </option>
+          ))}
+        </select>
+      </label>
+      <label className="mt-4 block">
+        <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-ink-muted">
+          Type of edit
+        </span>
+        <select
+          name="service"
+          className="h-11 w-full rounded-lg border border-robert-soft bg-snow px-4 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
+        >
+          <option value="">Select an edit type</option>
+          {SERVICE_TYPES.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.label}
+            </option>
+          ))}
+        </select>
+      </label>
+      <Field
+        label="Deadline / urgency"
+        name="deadline"
+        className="mt-4"
+        placeholder="e.g. need before 15 Nov, or flexible"
+      />
       <label className="mt-4 block">
         <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-ink-muted">
           Tell me about it
@@ -67,7 +101,7 @@ export function ContactForm() {
           rows={5}
           minLength={10}
           className="w-full rounded-lg border border-robert-soft bg-snow px-4 py-3 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
-          placeholder="Who's the audience? What's the deadline? What's the single hardest thing about this draft?"
+          placeholder="Which certificate is it? Which exact details need editing (name, date, place, etc.)? How soon do you need it back?"
         />
       </label>
       {error && (
@@ -83,10 +117,10 @@ export function ContactForm() {
           state === "sending" ? "opacity-60" : "hover:bg-robert",
         )}
       >
-        {state === "sending" ? "Sending to Convex…" : "Send to Robert"}
+        {state === "sending" ? "Sending…" : "Send to Robert"}
       </button>
       <p className="mt-3 text-xs text-ink-muted">
-        Submissions go straight to a Convex-backed inbox. I read every one.
+        Your request goes straight to Robert on WhatsApp. We never share details with anyone outside the case.
       </p>
     </form>
   );

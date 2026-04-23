@@ -46,7 +46,7 @@ export function Footer() {
       <div className="border-t border-robert-soft/60">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-6 py-6 text-xs text-ink-muted sm:flex-row sm:items-center">
           <p>© {new Date().getFullYear()} Robert Editing. All rights reserved.</p>
-          <p className="font-mono">Before I touch it, it&apos;s a draft.</p>
+          <p className="font-mono">Your paperwork, handled like a pro.</p>
         </div>
       </div>
     </footer>

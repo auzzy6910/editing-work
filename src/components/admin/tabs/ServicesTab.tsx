@@ -111,7 +111,6 @@ export function ServicesTab({ token }: { token: string }) {
                 </span>
               </div>
               <p className="mt-3 font-display text-lg">{r.name}</p>
-              <p className="text-xs text-robert">{r.price}</p>
               <p className="mt-2 line-clamp-3 text-xs text-ink-soft">{r.body}</p>
               <div className="mt-3 flex gap-2">
                 <button

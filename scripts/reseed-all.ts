@@ -1,13 +1,24 @@
 /**
- * Seed Convex with static content lifted out of the codebase:
- * testimonials, services, process steps, and default site settings.
- * Safe to run repeatedly — each seedPublic short-circuits if rows exist.
+ * Admin-only: wipe existing testimonials / services / processSteps rows
+ * and re-seed them with current fallbacks from scripts/seed-content.ts.
+ * Also overwrites every known settings key so copy reflects the current pivot.
+ * Also upserts cases.
+ *
+ * Usage:
+ *   ADMIN_TOKEN=... pnpm dlx tsx scripts/reseed-all.ts
  */
 import { ConvexHttpClient } from "convex/browser";
 import { api } from "../convex/_generated/api";
+import { CASES } from "../src/lib/cases";
 
 const url =
   process.env.NEXT_PUBLIC_CONVEX_URL ?? "https://precise-reindeer-603.convex.cloud";
+const token = process.env.ADMIN_TOKEN;
+
+if (!token) {
+  console.error("ADMIN_TOKEN env var is required");
+  process.exit(1);
+}
 
 const TESTIMONIALS = [
   {
@@ -168,12 +179,38 @@ const SETTINGS = [
 async function main() {
   const c = new ConvexHttpClient(url);
 
-  const t = await c.mutation(api.testimonials.seedPublic, { items: TESTIMONIALS });
-  const s = await c.mutation(api.services.seedPublic, { items: SERVICES });
-  const p = await c.mutation(api.processSteps.seedPublic, { items: PROCESS });
-  const st = await c.mutation(api.settings.seedPublic, { values: SETTINGS });
+  // Wipe and re-seed testimonials
+  const tRows = await c.query(api.testimonials.listAllAdmin, { token: token! });
+  for (const r of tRows) await c.mutation(api.testimonials.remove, { token: token!, id: r.id });
+  for (const t of TESTIMONIALS) await c.mutation(api.testimonials.create, { token: token!, ...t });
+  console.log(`testimonials: wiped ${tRows.length}, inserted ${TESTIMONIALS.length}`);
 
-  console.log(`seeded/existing → testimonials=${t} services=${s} process=${p} settings=${st}`);
+  // Wipe and re-seed services
+  const sRows = await c.query(api.services.listAllAdmin, { token: token! });
+  for (const r of sRows) await c.mutation(api.services.remove, { token: token!, id: r.id });
+  for (const s of SERVICES) await c.mutation(api.services.create, { token: token!, ...s });
+  console.log(`services: wiped ${sRows.length}, inserted ${SERVICES.length}`);
+
+  // Wipe and re-seed process steps
+  const pRows = await c.query(api.processSteps.listAllAdmin, { token: token! });
+  for (const r of pRows) await c.mutation(api.processSteps.remove, { token: token!, id: r.id });
+  for (const p of PROCESS) await c.mutation(api.processSteps.create, { token: token!, ...p });
+  console.log(`process: wiped ${pRows.length}, inserted ${PROCESS.length}`);
+
+  // Upsert settings (setMany is idempotent)
+  await c.mutation(api.settings.setMany, { token: token!, values: SETTINGS });
+  console.log(`settings: upserted ${SETTINGS.length} keys`);
+
+  // Upsert cases (seedPublic is idempotent upsert-by-slug)
+  const caseCount = await c.mutation(api.cases.seedPublic, { items: CASES });
+  console.log(`cases: upserted ${caseCount}`);
+
+  // Delete any cases whose slug is not in the new 8 — old literary cases.
+  const allCases = await c.query(api.cases.listForAdmin, { token: token! });
+  const keep = new Set(CASES.map((c) => c.slug));
+  const stale = allCases.filter((r) => !keep.has(r.slug));
+  for (const r of stale) await c.mutation(api.cases.remove, { token: token!, id: r.id });
+  console.log(`cases: removed ${stale.length} stale cases, kept ${CASES.length}`);
 }
 
 main().catch((e) => {

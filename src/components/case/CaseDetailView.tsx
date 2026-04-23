@@ -6,7 +6,7 @@ import { api } from "../../../convex/_generated/api";
 import { DOCUMENT_TYPES, type CaseStudy } from "@/lib/types";
 import { BeforeAfter } from "@/components/slider/BeforeAfter";
 import { AnimatedDiff } from "@/components/diff/AnimatedDiff";
-import { countryFlag, formatNumber } from "@/lib/utils";
+import { countryFlag } from "@/lib/utils";
 
 export function CaseDetailView({
   initial,
@@ -27,8 +27,6 @@ export function CaseDetailView({
   const isLive = liveAll !== undefined;
 
   const docType = DOCUMENT_TYPES.find((d) => d.id === c.documentType);
-  const wordsCut = c.wordCountBefore - c.wordCountAfter;
-  const wordsCutPct = Math.round((wordsCut / Math.max(1, c.wordCountBefore)) * 100);
   const readGain = c.readabilityAfter - c.readabilityBefore;
 
   return (
@@ -83,9 +81,11 @@ export function CaseDetailView({
         />
       </header>
 
-      <section className="mt-12">
-        <BeforeAfter before={c.excerptBefore} after={c.excerptAfter} title={c.title} />
-      </section>
+      {c.excerptBefore && c.excerptAfter && (
+        <section className="mt-12">
+          <BeforeAfter before={c.excerptBefore} after={c.excerptAfter} title={c.title} />
+        </section>
+      )}
 
       <section className="mt-12 grid gap-10 md:grid-cols-[1fr_1.2fr]">
         <div>
@@ -95,19 +95,28 @@ export function CaseDetailView({
           <h2 className="mt-2 font-display text-3xl">Why this edit.</h2>
           <p className="mt-4 text-ink-soft">{c.editorsNote}</p>
           <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-robert-soft/50 pt-6 text-sm">
-            <Row term="Words cut" value={`−${formatNumber(wordsCut)} (${wordsCutPct}%)`} />
-            <Row term="Readability gain" value={`+${readGain} Flesch`} />
-            <Row term="Language" value={c.languageName} />
-            <Row term="Industry" value={<span className="capitalize">{c.industry}</span>} />
             <Row term="Turnaround" value={`${Math.round(c.turnaroundHours / 24)} days`} />
+            <Row
+              term="Accuracy"
+              value={readGain > 0 ? `+${readGain}% on original` : "Fully resolved"}
+            />
+            <Row term="Language" value={c.languageName} />
+            <Row
+              term="Family"
+              value={<span className="capitalize">{c.industry.replace(/-/g, " ")}</span>}
+            />
+            <Row
+              term="Edit"
+              value={<span className="capitalize">{c.editingLevel.replace(/-/g, " ")}</span>}
+            />
             <Row term="Rating" value={"★".repeat(c.rating)} />
           </dl>
         </div>
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
-            Diff view
+            Before / after
           </p>
-          <h2 className="mt-2 font-display text-3xl">Red cut, blue kept.</h2>
+          <h2 className="mt-2 font-display text-3xl">Red fixed, blue kept.</h2>
           <p className="mt-2 mb-5 text-sm text-ink-soft">Scroll to animate.</p>
           <AnimatedDiff
             key={`${c.slug}:${c.excerptAfter.length}`}
@@ -173,24 +182,26 @@ function MetricsPanel({
   return (
     <div className="rounded-xl2 border border-robert-soft/60 bg-canvas p-6 shadow-card">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
-        Transformation
+        Outcome
       </p>
       <div className="mt-4 flex items-center gap-6">
         <ReadabilityDial before={readBefore} after={readAfter} />
         <div className="flex-1">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
-              <p className="text-xs uppercase tracking-widest text-ink-muted">Before</p>
-              <p className="mt-1 font-mono text-2xl text-ink">{formatNumber(before)}</p>
-              <p className="text-xs text-ink-muted">words</p>
+              <p className="text-xs uppercase tracking-widest text-ink-muted">Turnaround</p>
+              <p className="mt-1 font-mono text-2xl text-ink">{Math.round(turnaround / 24)}d</p>
+              <p className="text-xs text-ink-muted">working days</p>
             </div>
             <div>
-              <p className="text-xs uppercase tracking-widest text-robert">After</p>
-              <p className="mt-1 font-mono text-2xl text-robert">{formatNumber(after)}</p>
-              <p className="text-xs text-ink-muted">words</p>
+              <p className="text-xs uppercase tracking-widest text-robert">Accuracy</p>
+              <p className="mt-1 font-mono text-2xl text-robert">{readAfter}%</p>
+              <p className="text-xs text-ink-muted">on delivery</p>
             </div>
           </div>
-          <p className="mt-3 text-xs text-edit">−{formatNumber(cut)} words · {Math.round(turnaround / 24)}d turnaround</p>
+          <p className="mt-3 text-xs text-edit">
+            {cut > 0 ? `${cut} detail(s) corrected` : "Document obtained & delivered"}
+          </p>
         </div>
       </div>
     </div>

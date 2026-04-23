@@ -1,7 +1,8 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useQuery } from "convex/react";
+import { AnimatePresence, motion } from "framer-motion";
 import { api } from "../../../convex/_generated/api";
 import { CASES } from "@/lib/cases";
 import {
@@ -13,7 +14,7 @@ import {
   type EditingLevel,
   type Industry,
 } from "@/lib/types";
-import { cn, countryFlag, formatNumber } from "@/lib/utils";
+import { cn, countryFlag } from "@/lib/utils";
 import { DocumentCard } from "@/components/card/DocumentCard";
 
 type SortKey = "recent" | "biggest" | "highest" | "longest";
@@ -51,17 +52,38 @@ const INITIAL: FilterState = {
 };
 
 const TURNAROUNDS = [
-  { id: "24", label: "24h", max: 24 },
-  { id: "72", label: "3-day", max: 72 },
-  { id: "168", label: "1-week", max: 168 },
-  { id: "custom", label: "Custom", max: Infinity },
+  { id: "48", label: "48h", max: 48 },
+  { id: "168", label: "1 week", max: 168 },
+  { id: "336", label: "2 weeks", max: 336 },
+  { id: "custom", label: "Longer", max: Infinity },
 ];
 
 export function FilterConsole() {
-  const [f, setF] = useState<FilterState>(INITIAL);
+  const [f, setF] = useState<FilterState>(() =>
+    typeof window === "undefined"
+      ? INITIAL
+      : stateFromSearch(window.location.search),
+  );
   const live = useQuery(api.cases.listAll);
   const cases: CaseStudy[] = (live as CaseStudy[] | undefined) ?? CASES;
   const loading = live === undefined;
+
+  // Keep URL in sync with filter state so views are shareable.
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const qs = searchFromState(f);
+    const current = window.location.search.replace(/^\?/, "");
+    if (qs === current) return;
+    const next = qs ? `?${qs}` : window.location.pathname;
+    window.history.replaceState(null, "", next + window.location.hash);
+  }, [f]);
+
+  // React to back/forward navigation.
+  useEffect(() => {
+    const onPop = () => setF(stateFromSearch(window.location.search));
+    window.addEventListener("popstate", onPop);
+    return () => window.removeEventListener("popstate", onPop);
+  }, []);
 
   const countries = useMemo(() => {
     const map = new Map<string, { iso: string; name: string; count: number }>();
@@ -125,7 +147,7 @@ export function FilterConsole() {
                   loading ? "bg-ink-muted" : "animate-pulseDot bg-robert",
                 )}
               />
-              {filtered.length} docs
+              {filtered.length} cases
             </span>
           </div>
 
@@ -135,7 +157,7 @@ export function FilterConsole() {
             <input
               value={f.q}
               onChange={(e) => setF({ ...f, q: e.target.value })}
-              placeholder="Search titles, clients, excerpts…"
+              placeholder="Search titles, clients, tags…"
               className="h-10 w-full rounded-full border border-robert-soft bg-snow px-4 text-sm outline-none transition focus:border-robert focus:bg-canvas focus:shadow-ring"
             />
           </label>
@@ -210,7 +232,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Industry">
+          <Section title="Certificate family">
             <div className="flex flex-wrap gap-1.5">
               {INDUSTRIES.map((i) => {
                 const active = f.industries.includes(i.id);
@@ -232,7 +254,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Editing level">
+          <Section title="Edit type">
             <div className="grid grid-cols-2 gap-1.5">
               {EDITING_LEVELS.map((l) => {
                 const active = f.levels.includes(l.id);
@@ -274,24 +296,7 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Word count range">
-            <div className="space-y-2">
-              <div className="flex items-center gap-2 text-xs font-mono text-ink-soft">
-                <span>{formatNumber(f.minWords)}</span>
-                <span className="flex-1 border-t border-dashed border-robert-soft" />
-                <span>{formatNumber(f.maxWords)}</span>
-              </div>
-              <input
-                type="range"
-                min={0}
-                max={150_000}
-                step={1_000}
-                value={f.maxWords}
-                onChange={(e) => setF({ ...f, maxWords: Number(e.target.value) })}
-                className="w-full accent-robert"
-              />
-            </div>
-          </Section>
+
 
           <Section title="Year">
             <div className="flex flex-wrap gap-1.5">
@@ -313,15 +318,15 @@ export function FilterConsole() {
             </div>
           </Section>
 
-          <Section title="Improvement metrics">
+          <Section title="Outcomes">
             <div className="space-y-2">
               <Toggle
-                label="Readability +20%"
+                label="Delivered with 100% accuracy"
                 active={f.metricReadability}
                 onClick={() => setF({ ...f, metricReadability: !f.metricReadability })}
               />
               <Toggle
-                label="−15% word count"
+                label="Under 1 week turnaround"
                 active={f.metricWordCut}
                 onClick={() => setF({ ...f, metricWordCut: !f.metricWordCut })}
               />
@@ -335,9 +340,9 @@ export function FilterConsole() {
               className="h-9 w-full rounded-md border border-robert-soft bg-canvas px-2 text-sm outline-none focus:border-robert focus:shadow-ring"
             >
               <option value="recent">Most recent</option>
-              <option value="biggest">Biggest transformation</option>
+              <option value="biggest">Most paperwork</option>
               <option value="highest">Highest rated</option>
-              <option value="longest">Longest document</option>
+              <option value="longest">Longest case</option>
             </select>
           </Section>
 
@@ -362,11 +367,22 @@ export function FilterConsole() {
             </p>
           </div>
         ) : (
-          <div className="grid gap-6 sm:grid-cols-2">
-            {filtered.map((c, i) => (
-              <DocumentCard key={c.slug} c={c} index={i} />
-            ))}
-          </div>
+          <motion.div layout className="grid gap-6 sm:grid-cols-2">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((c, i) => (
+                <motion.div
+                  key={c.slug}
+                  layout
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.98 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <DocumentCard c={c} index={i} />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </motion.div>
         )}
       </section>
     </div>
@@ -441,11 +457,8 @@ function filterCases(cases: CaseStudy[], f: FilterState): CaseStudy[] {
     }
     if (c.wordCountBefore < f.minWords || c.wordCountBefore > f.maxWords) return false;
     if (f.year !== "any" && new Date(c.date).getFullYear() !== f.year) return false;
-    if (f.metricReadability && c.readabilityAfter - c.readabilityBefore < 20) return false;
-    if (f.metricWordCut) {
-      const cut = (c.wordCountBefore - c.wordCountAfter) / c.wordCountBefore;
-      if (cut < 0.15) return false;
-    }
+    if (f.metricReadability && c.readabilityAfter < 100) return false;
+    if (f.metricWordCut && c.turnaroundHours > 168) return false;
     return true;
   });
 
@@ -454,15 +467,66 @@ function filterCases(cases: CaseStudy[], f: FilterState): CaseStudy[] {
       case "recent":
         return +new Date(b.date) - +new Date(a.date);
       case "biggest":
-        return (
-          (b.wordCountBefore - b.wordCountAfter) / b.wordCountBefore -
-          (a.wordCountBefore - a.wordCountAfter) / a.wordCountBefore
-        );
+        return b.wordCountBefore - a.wordCountBefore;
       case "highest":
         return b.rating - a.rating;
       case "longest":
-        return b.wordCountBefore - a.wordCountBefore;
+        return b.turnaroundHours - a.turnaroundHours;
     }
   });
   return out;
+}
+
+// --- URL <-> state sync -----------------------------------------------
+function stateFromSearch(search: string): FilterState {
+  const p = new URLSearchParams(search);
+  const list = (k: string) =>
+    (p.get(k) ?? "")
+      .split(",")
+      .map((s) => s.trim())
+      .filter(Boolean);
+  const num = (k: string, d: number) => {
+    const v = Number(p.get(k));
+    return Number.isFinite(v) && p.get(k) ? v : d;
+  };
+  const year = p.get("year");
+  const sort = (p.get("sort") as SortKey) || INITIAL.sort;
+  return {
+    q: p.get("q") ?? "",
+    countries: list("countries"),
+    types: list("types") as DocumentType[],
+    languages: list("languages"),
+    industries: list("industries") as Industry[],
+    levels: list("levels") as EditingLevel[],
+    turnarounds: list("turnarounds"),
+    minWords: num("minWords", 0),
+    maxWords: num("maxWords", 150_000),
+    year: year && year !== "any" ? Number(year) : "any",
+    metricReadability: p.get("readability") === "1",
+    metricWordCut: p.get("cut") === "1",
+    sort: ["recent", "biggest", "highest", "longest"].includes(sort)
+      ? sort
+      : "recent",
+  };
+}
+
+function searchFromState(f: FilterState): string {
+  const p = new URLSearchParams();
+  const setList = (k: string, a: string[]) => {
+    if (a.length) p.set(k, a.join(","));
+  };
+  if (f.q) p.set("q", f.q);
+  setList("countries", f.countries);
+  setList("types", f.types);
+  setList("languages", f.languages);
+  setList("industries", f.industries);
+  setList("levels", f.levels);
+  setList("turnarounds", f.turnarounds);
+  if (f.minWords > 0) p.set("minWords", String(f.minWords));
+  if (f.maxWords < 150_000) p.set("maxWords", String(f.maxWords));
+  if (f.year !== "any") p.set("year", String(f.year));
+  if (f.metricReadability) p.set("readability", "1");
+  if (f.metricWordCut) p.set("cut", "1");
+  if (f.sort !== "recent") p.set("sort", f.sort);
+  return p.toString();
 }

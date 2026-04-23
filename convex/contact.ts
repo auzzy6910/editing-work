@@ -5,20 +5,24 @@ import { assertAdmin } from "./admin";
 export const submit = mutation({
   args: {
     name: v.string(),
-    email: v.string(),
+    email: v.optional(v.string()),
     documentType: v.optional(v.string()),
     language: v.optional(v.string()),
     approximateWordCount: v.optional(v.string()),
     message: v.string(),
   },
   handler: async (ctx, args) => {
-    if (!args.name.trim()) throw new Error("Name is required");
-    if (!args.email.includes("@")) throw new Error("Valid email required");
+    if (!args.name.trim()) throw new Error("Nickname is required");
     if (args.message.trim().length < 10)
       throw new Error("Tell me a bit more (10+ characters)");
 
     const id = await ctx.db.insert("contacts", {
-      ...args,
+      name: args.name,
+      email: args.email ?? "",
+      documentType: args.documentType,
+      language: args.language,
+      approximateWordCount: args.approximateWordCount,
+      message: args.message,
       submittedAt: Date.now(),
       status: "new",
       starred: false,

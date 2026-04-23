@@ -1,41 +1,25 @@
 export type DocumentType =
-  | "academic-paper"
-  | "book-manuscript"
-  | "legal-contract"
-  | "thesis"
-  | "article"
-  | "business-report"
-  | "resume"
-  | "cover-letter"
-  | "speech"
-  | "grant-proposal"
-  | "research-report"
-  | "website-copy"
-  | "ux-copy"
-  | "fiction"
-  | "poetry"
-  | "press-release"
-  | "whitepaper"
-  | "marketing-email"
-  | "screenplay"
-  | "social-thread";
+  | "birth-certificate"
+  | "marriage-certificate"
+  | "kcpe-kcse-certificate"
+  | "travel-document"
+  | "degree-diploma-craft";
 
 export type Industry =
-  | "academic"
-  | "legal"
-  | "tech"
-  | "finance"
-  | "healthcare"
-  | "creative"
-  | "ngo"
-  | "government";
+  | "civil-registration"
+  | "education"
+  | "immigration"
+  | "tertiary-education";
 
-export type EditingLevel =
-  | "proofreading"
-  | "copy-edit"
-  | "line-edit"
-  | "developmental"
-  | "ghostwriting";
+export type ServiceType =
+  | "new-application"
+  | "correction"
+  | "replacement"
+  | "expedited"
+  | "verification";
+
+// Legacy alias so existing references compile during the pivot.
+export type EditingLevel = ServiceType;
 
 export interface CaseStudy {
   slug: string;
@@ -47,10 +31,10 @@ export interface CaseStudy {
   languageName: string;
   documentType: DocumentType;
   industry: Industry;
-  editingLevel: EditingLevel;
+  editingLevel: ServiceType;
   wordCountBefore: number;
   wordCountAfter: number;
-  readabilityBefore: number; // Flesch
+  readabilityBefore: number;
   readabilityAfter: number;
   turnaroundHours: number;
   date: string; // ISO
@@ -62,43 +46,26 @@ export interface CaseStudy {
 }
 
 export const DOCUMENT_TYPES: { id: DocumentType; label: string; icon: string }[] = [
-  { id: "academic-paper", label: "Academic paper", icon: "📄" },
-  { id: "book-manuscript", label: "Book manuscript", icon: "📘" },
-  { id: "legal-contract", label: "Legal contract", icon: "📜" },
-  { id: "thesis", label: "Thesis / dissertation", icon: "🎓" },
-  { id: "article", label: "Article / essay", icon: "📰" },
-  { id: "business-report", label: "Business report", icon: "💼" },
-  { id: "resume", label: "Resume / CV", icon: "🧾" },
-  { id: "cover-letter", label: "Cover letter", icon: "✉️" },
-  { id: "speech", label: "Speech / script", icon: "🎤" },
-  { id: "grant-proposal", label: "Grant proposal", icon: "💡" },
-  { id: "research-report", label: "Research report", icon: "🧪" },
-  { id: "website-copy", label: "Website copy", icon: "🌐" },
-  { id: "ux-copy", label: "App UX copy", icon: "📱" },
-  { id: "fiction", label: "Fiction", icon: "📕" },
-  { id: "poetry", label: "Poetry", icon: "🕊" },
-  { id: "press-release", label: "Press release", icon: "🗞" },
-  { id: "whitepaper", label: "Whitepaper", icon: "📊" },
-  { id: "marketing-email", label: "Marketing email", icon: "📧" },
-  { id: "screenplay", label: "Screenplay", icon: "🎬" },
-  { id: "social-thread", label: "Social thread", icon: "🧵" },
+  { id: "birth-certificate", label: "Birth Certificate", icon: "🧾" },
+  { id: "marriage-certificate", label: "Marriage Certificate", icon: "💍" },
+  { id: "kcpe-kcse-certificate", label: "KCPE & KCSE Certificate", icon: "🎓" },
+  { id: "travel-document", label: "Travel Document (Passport/Visa)", icon: "🛂" },
+  { id: "degree-diploma-craft", label: "Degree, Diploma & Craft Certificate", icon: "📜" },
 ];
 
 export const INDUSTRIES: { id: Industry; label: string }[] = [
-  { id: "academic", label: "Academic" },
-  { id: "legal", label: "Legal" },
-  { id: "tech", label: "Tech" },
-  { id: "finance", label: "Finance" },
-  { id: "healthcare", label: "Healthcare" },
-  { id: "creative", label: "Creative" },
-  { id: "ngo", label: "NGO" },
-  { id: "government", label: "Government" },
+  { id: "civil-registration", label: "Civil certificates" },
+  { id: "education", label: "School certificates" },
+  { id: "immigration", label: "Travel documents" },
+  { id: "tertiary-education", label: "Tertiary certificates" },
 ];
 
-export const EDITING_LEVELS: { id: EditingLevel; label: string }[] = [
-  { id: "proofreading", label: "Proofreading" },
-  { id: "copy-edit", label: "Copy-edit" },
-  { id: "line-edit", label: "Line-edit" },
-  { id: "developmental", label: "Developmental" },
-  { id: "ghostwriting", label: "Ghostwriting" },
+export const EDITING_LEVELS: { id: ServiceType; label: string }[] = [
+  { id: "correction", label: "Text edit" },
+  { id: "replacement", label: "Scan retouch" },
+  { id: "expedited", label: "Rush edit" },
+  { id: "new-application", label: "Full rebuild" },
+  { id: "verification", label: "Detail check" },
 ];
+
+export const SERVICE_TYPES = EDITING_LEVELS;
