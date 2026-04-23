@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { LiveCountries } from "@/components/about/LiveCountries";
+import { WHATSAPP_BOOK_URL } from "@/lib/utils";
 
 export const metadata = {
   title: "About — Robert Editing",
@@ -90,12 +91,14 @@ export default function AboutPage() {
       </div>
 
       <div className="mt-12 flex gap-3">
-        <Link
-          href="/contact"
+        <a
+          href={WHATSAPP_BOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white transition hover:bg-robert"
         >
           Book editing
-        </Link>
+        </a>
         <Link
           href="/work"
           className="rounded-full border border-robert-soft bg-canvas px-5 py-2.5 text-sm transition hover:border-robert"

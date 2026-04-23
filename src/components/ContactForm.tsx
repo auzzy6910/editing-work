@@ -19,7 +19,6 @@ export function ContactForm() {
     try {
       await submit({
         name: String(fd.get("name") ?? ""),
-        email: String(fd.get("email") ?? ""),
         documentType: String(fd.get("type") ?? "") || undefined,
         language: String(fd.get("service") ?? "") || undefined,
         approximateWordCount: String(fd.get("deadline") ?? "") || undefined,
@@ -40,7 +39,7 @@ export function ContactForm() {
         </span>
         <h2 className="mt-4 font-display text-4xl">Thanks — I&apos;ll reply today.</h2>
         <p className="mt-2 text-ink-soft">
-          Your request is logged. I&apos;ll follow up on WhatsApp or email within a few hours with a
+          Your request is logged. I&apos;ll follow up on WhatsApp within a few hours with a
           clear quote and timeline.
         </p>
       </div>
@@ -52,10 +51,7 @@ export function ContactForm() {
       onSubmit={onSubmit}
       className="rounded-xl2 border border-robert-soft/60 bg-canvas p-8 shadow-card"
     >
-      <div className="grid gap-4 sm:grid-cols-2">
-        <Field label="Your name" name="name" required />
-        <Field label="Email / phone" name="email" type="text" required />
-      </div>
+      <Field label="Your nickname" name="name" required />
       <label className="mt-4 block">
         <span className="mb-1 block text-xs font-semibold uppercase tracking-widest text-ink-muted">
           Document type
@@ -124,7 +120,7 @@ export function ContactForm() {
         {state === "sending" ? "Sending…" : "Send to Robert"}
       </button>
       <p className="mt-3 text-xs text-ink-muted">
-        Your request goes straight to Robert. We never share details with anyone outside the case.
+        Your request goes straight to Robert on WhatsApp. We never share details with anyone outside the case.
       </p>
     </form>
   );

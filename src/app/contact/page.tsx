@@ -29,10 +29,6 @@ export default function ContactPage() {
         </a>
         <dl className="mt-10 grid grid-cols-2 gap-6 text-sm">
           <div>
-            <dt className="text-xs uppercase tracking-widest text-ink-muted">WhatsApp</dt>
-            <dd className="mt-1 font-mono">+254 714 207 523</dd>
-          </div>
-          <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Turnaround</dt>
             <dd className="mt-1 font-mono">Reply same day · edits in 1–3 days</dd>
           </div>

@@ -1,8 +1,8 @@
 "use client";
 
-import Link from "next/link";
 import { useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import { WHATSAPP_BOOK_URL } from "@/lib/utils";
 
 const COMMON_ITEMS = [
   "Correcting misspelled names",
@@ -113,12 +113,14 @@ export function LiveServices() {
           tell you — honestly — whether the detail can be cleanly edited and retouched on
           the scan or not.
         </p>
-        <Link
-          href="/contact"
+        <a
+          href={WHATSAPP_BOOK_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="mt-6 inline-flex rounded-full bg-white px-5 py-2.5 text-sm font-medium text-ink transition hover:bg-robert-soft"
         >
-          Ask a question →
-        </Link>
+          Ask on WhatsApp →
+        </a>
       </div>
     </div>
   );

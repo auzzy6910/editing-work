@@ -21,7 +21,6 @@ export function FooterNewsletterCopy() {
 
 export function FooterContactLink() {
   const s = useQuery(api.settings.all);
-  const email = s?.["contact.email"] ?? "hello@robertediting.co.ke";
   const facebook =
     s?.["social.facebook"] ??
     "https://www.facebook.com/profile.php?id=61567790639771";
@@ -43,11 +42,6 @@ export function FooterContactLink() {
             <path d="M32 16C32 7.164 24.836 0 16 0S0 7.164 0 16c0 7.986 5.851 14.605 13.5 15.805V20.625h-4.063V16H13.5v-3.525c0-4.01 2.389-6.225 6.043-6.225 1.75 0 3.582.313 3.582.313v3.938h-2.017c-1.987 0-2.608 1.233-2.608 2.498V16h4.438l-.71 4.625H18.5v11.18C26.149 30.605 32 23.986 32 16z" />
           </svg>
           Facebook
-        </a>
-      </li>
-      <li>
-        <a className="text-ink-soft hover:text-robert" href={`mailto:${email}`}>
-          {email}
         </a>
       </li>
     </ul>

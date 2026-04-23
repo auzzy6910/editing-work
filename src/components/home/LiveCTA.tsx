@@ -1,10 +1,10 @@
 "use client";
 
-import Link from "next/link";
 import { useQuery } from "convex/react";
 import { motion } from "framer-motion";
 import { api } from "../../../convex/_generated/api";
 import { Reveal } from "@/components/ui/Reveal";
+import { WHATSAPP_BOOK_URL } from "@/lib/utils";
 
 export function LiveCTA() {
   const settings = useQuery(api.settings.all);
@@ -36,12 +36,14 @@ export function LiveCTA() {
           </p>
           <h2 className="relative mt-4 font-display text-4xl md:text-6xl">{title}</h2>
           <p className="relative mx-auto mt-4 max-w-xl text-white/70">{body}</p>
-          <Link
-            href="/contact"
+          <a
+            href={WHATSAPP_BOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="relative mt-8 inline-flex rounded-full bg-white px-6 py-3 text-sm font-medium text-ink shadow-card transition duration-300 hover:-translate-y-0.5 hover:bg-robert-soft"
           >
             {button}
-          </Link>
+          </a>
         </div>
       </Reveal>
     </section>

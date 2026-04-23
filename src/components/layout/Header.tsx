@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Logo } from "@/components/brand/Logo";
+import { WHATSAPP_BOOK_URL } from "@/lib/utils";
 
 const NAV = [
   { href: "/work", label: "Work" },
@@ -25,12 +26,14 @@ export function Header() {
           ))}
         </nav>
         <div className="flex items-center gap-2">
-          <Link
-            href="/contact"
+          <a
+            href={WHATSAPP_BOOK_URL}
+            target="_blank"
+            rel="noopener noreferrer"
             className="hidden rounded-full bg-ink px-5 py-2.5 text-sm font-medium text-white shadow-card transition-all hover:bg-robert hover:shadow-cardHover sm:inline-flex"
           >
             Book editing
-          </Link>
+          </a>
         </div>
       </div>
     </header>

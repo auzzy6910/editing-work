@@ -4,6 +4,7 @@ import Link from "next/link";
 import dynamic from "next/dynamic";
 import { motion } from "framer-motion";
 import { CASES } from "@/lib/cases";
+import { WHATSAPP_BOOK_URL } from "@/lib/utils";
 import {
   LiveFeaturedWork,
   LiveHeroStats,
@@ -79,12 +80,14 @@ export default function Home() {
                 >
                   <span className="relative z-10">See recent cases →</span>
                 </Link>
-                <Link
-                  href="/contact"
+                <a
+                  href={WHATSAPP_BOOK_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="rounded-full border border-robert-soft bg-canvas px-6 py-3 text-sm font-medium text-ink transition duration-300 hover:-translate-y-0.5 hover:border-robert hover:text-robert"
                 >
                   Book editing
-                </Link>
+                </a>
               </div>
               <LiveHeroStats />
             </motion.div>
