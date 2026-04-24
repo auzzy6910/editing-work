@@ -50,7 +50,7 @@ export function LiveProcess() {
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
             Process
           </p>
-          <h2 className="mt-2 max-w-2xl font-display text-4xl md:text-5xl">
+          <h2 className="mt-2 max-w-2xl font-display text-3xl sm:text-4xl md:text-5xl">
             {rows.length} steps. One promise: pixel-perfect edits, nothing more.
           </h2>
         </Reveal>
@@ -61,7 +61,7 @@ export function LiveProcess() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
-              className="mt-12 grid gap-6 md:grid-cols-4"
+              className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
             >
               {Array.from({ length: 4 }).map((_, i) => (
                 <div
@@ -80,12 +80,7 @@ export function LiveProcess() {
               className="mt-12 grid gap-6"
               gap={0.06}
             >
-              <div
-                className="grid gap-6"
-                style={{
-                  gridTemplateColumns: `repeat(${Math.min(Math.max(rows.length, 1), 4)}, minmax(0, 1fr))`,
-                }}
-              >
+              <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
                 {rows.map((s) => (
                   <StaggerItem key={s.id}>
                     <motion.div

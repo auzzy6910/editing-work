@@ -56,7 +56,7 @@ export function LiveHeroStats() {
   const isLive = live !== undefined;
 
   return (
-    <div className="mt-10 grid max-w-md grid-cols-3 gap-6 border-t border-robert-soft/50 pt-6 font-mono text-xs text-ink-muted">
+    <div className="mt-10 grid max-w-md grid-cols-3 gap-3 border-t border-robert-soft/50 pt-6 font-mono text-xs text-ink-muted sm:gap-6">
       <Stat value={totalDocs} label="docs edited" live={isLive} />
       <Stat
         value={Math.max(totalWordsCut * multWords, 1200)}
@@ -94,7 +94,7 @@ export function LiveFeaturedWork() {
             />
             Featured work
           </p>
-          <h2 className="mt-2 font-display text-4xl md:text-5xl">
+          <h2 className="mt-2 font-display text-3xl sm:text-4xl md:text-5xl">
             Six recent certificates we edited.
           </h2>
         </div>
@@ -131,6 +131,14 @@ export function LiveFeaturedWork() {
           </Stagger>
         )}
       </AnimatePresence>
+      <div className="mt-8 text-center md:hidden">
+        <Link
+          href="/work"
+          className="inline-flex rounded-full border border-robert-soft bg-canvas px-5 py-2.5 text-sm transition duration-300 hover:-translate-y-0.5 hover:border-robert hover:text-robert"
+        >
+          Browse all {total} →
+        </Link>
+      </div>
     </section>
   );
 }

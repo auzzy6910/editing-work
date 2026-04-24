@@ -73,7 +73,7 @@ export function LiveServices() {
         />
         Services
       </p>
-      <h1 className="mt-2 max-w-3xl font-display text-5xl md:text-7xl leading-[1.05]">
+      <h1 className="mt-2 max-w-3xl font-display text-3xl sm:text-5xl md:text-7xl leading-[1.05]">
         {numberWord(count)} {count === 1 ? "document" : "documents"} we edit and retouch.
       </h1>
       <p className="mt-6 max-w-2xl text-lg text-ink-soft">
@@ -106,8 +106,8 @@ export function LiveServices() {
         ))}
       </div>
 
-      <div className="mt-16 rounded-xl2 bg-ink p-10 text-white md:p-14">
-        <h3 className="font-display text-3xl md:text-4xl">Not sure what&apos;s fixable?</h3>
+      <div className="mt-16 rounded-xl2 bg-ink p-6 text-white sm:p-10 md:p-14">
+        <h3 className="font-display text-2xl sm:text-3xl md:text-4xl">Not sure what&apos;s fixable?</h3>
         <p className="mt-3 max-w-2xl text-white/70">
           Share a clear scan of your certificate and point out what needs editing. I&apos;ll
           tell you — honestly — whether the detail can be cleanly edited and retouched on

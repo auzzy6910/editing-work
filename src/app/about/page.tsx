@@ -20,7 +20,7 @@ export default function AboutPage() {
   return (
     <div className="mx-auto max-w-4xl px-6 py-24">
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">About</p>
-      <h1 className="mt-2 font-display text-5xl md:text-7xl leading-[1.05]">
+      <h1 className="mt-2 font-display text-3xl sm:text-5xl md:text-7xl leading-[1.05]">
         Your paperwork. Edited clean.
       </h1>
       <div className="mt-10 space-y-6 text-lg text-ink-soft">

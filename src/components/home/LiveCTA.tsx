@@ -18,7 +18,7 @@ export function LiveCTA() {
   return (
     <section className="mx-auto max-w-7xl px-6 pb-24">
       <Reveal direction="up">
-        <div className="relative overflow-hidden rounded-xl2 bg-ink p-12 text-center text-white md:p-20">
+        <div className="relative overflow-hidden rounded-xl2 bg-ink p-8 text-center text-white sm:p-12 md:p-20">
           <motion.div
             aria-hidden
             className="absolute -right-20 -top-20 h-80 w-80 rounded-full bg-robert/40 blur-3xl"
@@ -34,7 +34,7 @@ export function LiveCTA() {
           <p className="relative text-xs font-semibold uppercase tracking-[0.25em] text-robert-soft">
             {kicker}
           </p>
-          <h2 className="relative mt-4 font-display text-4xl md:text-6xl">{title}</h2>
+          <h2 className="relative mt-4 font-display text-3xl sm:text-4xl md:text-6xl">{title}</h2>
           <p className="relative mx-auto mt-4 max-w-xl text-white/70">{body}</p>
           <a
             href={WHATSAPP_BOOK_URL}

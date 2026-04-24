@@ -7,7 +7,7 @@ export default function ContactPage() {
     <div className="mx-auto grid max-w-6xl gap-12 px-6 py-24 md:grid-cols-[1fr_1.1fr]">
       <div>
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">Contact</p>
-        <h1 className="mt-2 font-display text-5xl md:text-7xl leading-[1.05]">
+        <h1 className="mt-2 font-display text-3xl sm:text-5xl md:text-7xl leading-[1.05]">
           Tell me what you need.
         </h1>
         <p className="mt-6 text-lg text-ink-soft">
@@ -27,7 +27,7 @@ export default function ContactPage() {
           </svg>
           Chat on WhatsApp
         </a>
-        <dl className="mt-10 grid grid-cols-2 gap-6 text-sm">
+        <dl className="mt-10 grid grid-cols-1 gap-6 text-sm sm:grid-cols-2">
           <div>
             <dt className="text-xs uppercase tracking-widest text-ink-muted">Turnaround</dt>
             <dd className="mt-1 font-mono">Reply same day · edits in 1–3 days</dd>

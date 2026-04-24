@@ -62,7 +62,7 @@ export default function Home() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
             >
               <LiveHeroBadge />
-              <h1 className="mt-6 font-display text-5xl leading-[1.02] text-ink md:text-7xl">
+              <h1 className="mt-6 font-display text-3xl leading-[1.08] text-ink sm:text-5xl md:text-7xl">
                 Your paperwork,
                 <br />
                 handled like a{" "}
