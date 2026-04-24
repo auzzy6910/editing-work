@@ -23,11 +23,11 @@ export default function WorkPage() {
         <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
           Recent cases
         </p>
-        <h1 className="mt-2 font-display text-5xl md:text-6xl">
+        <h1 className="mt-2 font-display text-3xl sm:text-5xl md:text-6xl">
           What we&apos;ve sorted out.
         </h1>
         <p className="mt-4 text-lg text-ink-soft">
-          Real cases, real outcomes. Filter the console on the left — the URL
+          Real cases, real outcomes. Filter the console below to narrow results — the URL
           updates so you can share any view.
         </p>
       </header>

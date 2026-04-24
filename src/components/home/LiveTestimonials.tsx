@@ -50,7 +50,7 @@ export function LiveTestimonials() {
           />
           Testimonials
         </p>
-        <h2 className="mt-2 max-w-3xl font-display text-4xl md:text-5xl">
+        <h2 className="mt-2 max-w-3xl font-display text-3xl sm:text-4xl md:text-5xl">
           &ldquo;Pixel-perfect. Same-day. No drama.&rdquo;
         </h2>
       </Reveal>

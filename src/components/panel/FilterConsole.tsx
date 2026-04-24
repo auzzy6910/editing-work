@@ -59,6 +59,7 @@ const TURNAROUNDS = [
 ];
 
 export function FilterConsole() {
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const [f, setF] = useState<FilterState>(() =>
     typeof window === "undefined"
       ? INITIAL
@@ -135,22 +136,33 @@ export function FilterConsole() {
       {/* Side Panel */}
       <aside className="lg:sticky lg:top-24 lg:self-start">
         <div className="rounded-xl2 border border-robert-soft/60 bg-canvas p-6 shadow-card">
-          <div className="flex items-center justify-between">
+          <button
+            type="button"
+            className="flex w-full items-center justify-between lg:pointer-events-none"
+            onClick={() => setFiltersOpen((v) => !v)}
+            aria-expanded={filtersOpen}
+          >
             <h2 className="font-display text-lg">Filter console</h2>
-            <span
-              className="flex items-center gap-1.5 rounded-full bg-robert-ghost px-2.5 py-1 text-xs font-medium text-robert"
-              title={loading ? "Loading from Convex…" : "Live from Convex"}
-            >
+            <div className="flex items-center gap-2">
               <span
-                className={cn(
-                  "h-1.5 w-1.5 rounded-full",
-                  loading ? "bg-ink-muted" : "animate-pulseDot bg-robert",
-                )}
-              />
-              {filtered.length} cases
-            </span>
-          </div>
+                className="flex items-center gap-1.5 rounded-full bg-robert-ghost px-2.5 py-1 text-xs font-medium text-robert"
+                title={loading ? "Loading from Convex…" : "Live from Convex"}
+              >
+                <span
+                  className={cn(
+                    "h-1.5 w-1.5 rounded-full",
+                    loading ? "bg-ink-muted" : "animate-pulseDot bg-robert",
+                  )}
+                />
+                {filtered.length} cases
+              </span>
+              <span className={cn("text-ink-muted transition-transform duration-200 lg:hidden", filtersOpen && "rotate-180")}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden><path d="M4 6l4 4 4-4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </span>
+            </div>
+          </button>
 
+          <div className={cn("overflow-hidden transition-all duration-300 lg:max-h-none lg:overflow-visible", filtersOpen ? "max-h-[2000px]" : "max-h-0 lg:max-h-none")}>
           {/* Search */}
           <label className="mt-5 block">
             <span className="sr-only">Search cases</span>
@@ -354,6 +366,7 @@ export function FilterConsole() {
               Reset filters
             </button>
           )}
+          </div>
         </div>
       </aside>
 

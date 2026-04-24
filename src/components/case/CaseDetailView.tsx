@@ -51,20 +51,20 @@ export function CaseDetailView({
 
       <header className="mt-6 grid gap-8 md:grid-cols-[1.4fr_1fr]">
         <div>
-          <div className="flex items-center gap-2 text-xs text-ink-muted">
+          <div className="flex flex-wrap items-center gap-2 text-xs text-ink-muted">
             <span aria-hidden>{docType?.icon}</span>
             <span>{docType?.label}</span>
             <span className="text-robert-soft">•</span>
             <span className="capitalize">{c.editingLevel.replace("-", " ")}</span>
-            <span className="text-robert-soft">•</span>
-            <span>
+            <span className="hidden text-robert-soft sm:inline">•</span>
+            <span className="hidden sm:inline">
               {new Date(c.date).toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
               })}
             </span>
           </div>
-          <h1 className="mt-3 font-display text-4xl leading-tight md:text-6xl">
+          <h1 className="mt-3 font-display text-2xl leading-tight sm:text-4xl md:text-6xl">
             {c.title}
           </h1>
           <p className="mt-4 text-lg text-ink-soft">
@@ -94,7 +94,7 @@ export function CaseDetailView({
           </p>
           <h2 className="mt-2 font-display text-3xl">Why this edit.</h2>
           <p className="mt-4 text-ink-soft">{c.editorsNote}</p>
-          <dl className="mt-6 grid grid-cols-2 gap-4 border-t border-robert-soft/50 pt-6 text-sm">
+          <dl className="mt-6 grid grid-cols-1 gap-4 border-t border-robert-soft/50 pt-6 text-sm sm:grid-cols-2">
             <Row term="Turnaround" value={`${Math.round(c.turnaroundHours / 24)} days`} />
             <Row
               term="Accuracy"
@@ -139,7 +139,7 @@ export function CaseDetailView({
 
       <Link
         href={`/work/${next.slug}`}
-        className="mt-16 flex items-center justify-between gap-6 rounded-xl2 border border-robert-soft/60 bg-canvas p-8 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover"
+        className="mt-16 flex flex-col items-start gap-4 rounded-xl2 border border-robert-soft/60 bg-canvas p-6 shadow-card transition hover:-translate-y-1 hover:shadow-cardHover sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:p-8"
       >
         <div>
           <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
@@ -184,9 +184,9 @@ function MetricsPanel({
       <p className="text-xs font-semibold uppercase tracking-[0.25em] text-robert">
         Outcome
       </p>
-      <div className="mt-4 flex items-center gap-6">
+      <div className="mt-4 flex flex-col items-center gap-6 sm:flex-row">
         <ReadabilityDial before={readBefore} after={readAfter} />
-        <div className="flex-1">
+        <div className="w-full flex-1">
           <div className="grid grid-cols-2 gap-4 text-sm">
             <div>
               <p className="text-xs uppercase tracking-widest text-ink-muted">Turnaround</p>
